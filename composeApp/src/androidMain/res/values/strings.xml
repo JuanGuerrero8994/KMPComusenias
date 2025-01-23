@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Comuseñas</string>
+    <string name="onBoardingText1">Aprende lenguaje de señas de manera divertida.</string>
+    <string name="onBoardingText2">Únete a nuestra comunidad comprometida en el aprendizaje y uso del lenguaje de señas.</string>
+    <string name="onBoardingText3">¿Listo para un viaje de aprendizaje emocionante? ¡Vamos a empezar!</string>
+    <string name="permissionGalleryText">No has solicitado el permiso de Galeria</string>
+    <string name ="permissionCameraText">"No has solicitado el permiso de Cámara"</string>
+    <string name ="permissionRecordText">"No has solicitado el permiso de Grabacion"</string>
+    <string name="recordStartCamera">Video capture Start</string>
+    <string name="recordFailedCamera">Video capture Failed</string>
+    <string name="recordSuccessCamera">Video Success</string>
+    <string name ="loadingResults">Cargando resultados…</string>
+    <string name="MIME_TYPE_MP4">video/mp4</string>
+    <string name="noneResultGesture">none</string>
+    <string name="emptyResultGesture"></string>
+    <string name="FilesDirRecordCamera">CameraXVideos</string>
+</resources>
