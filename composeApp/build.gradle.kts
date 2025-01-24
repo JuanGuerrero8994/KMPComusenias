@@ -17,9 +17,10 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+    jvm()
     
     listOf(
         iosX64(),
@@ -32,27 +33,7 @@ kotlin {
         }
     }
 
-    jvm("desktop") // Agrega el target JVM para el escritorio
-    
-    /*@OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
-        binaries.executable()
-    }*/
+
     js(IR) {
         moduleName = "composeApp"
         browser {
@@ -73,7 +54,6 @@ kotlin {
     sourceSets {
 
 
-        val desktopMain by getting
 
         androidMain.dependencies {
             implementation(compose.preview)
@@ -85,9 +65,8 @@ kotlin {
             //FIREBASE
             implementation(project.dependencies.platform(libs.firebase.bom))
 
-
-
         }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -98,16 +77,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            //KTOR
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.serialization.kotlinx.json)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.client.logging)
 
             //FIREBASE
             implementation(libs.gitlive.firebase.auth) //  AUTH
             implementation(libs.gitlive.firebase.firestore) //  FIRESTORE
-
 
             //NAPIER LOGS
             implementation(libs.napier)
@@ -130,6 +103,9 @@ kotlin {
             implementation(libs.coil.network.ktor)
 
 
+            //DATEPICKER
+            implementation(libs.datetime)
+
         }
         iosMain.dependencies {
             //KTOR IOS
@@ -137,11 +113,6 @@ kotlin {
         }
 
 
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
-
-        }
 
 
     }
@@ -150,10 +121,6 @@ kotlin {
 android {
     namespace = "org.example.project"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
         applicationId = "org.example.project"
@@ -173,8 +140,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -182,14 +149,3 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
-compose.desktop {
-    application {
-        mainClass = "org.example.project.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "org.example.project"
-            packageVersion = "1.0.0"
-        }
-    }
-}

@@ -2,6 +2,7 @@ package org.example.project.ui.components.scaffold.bottomNavBar
 
 
 import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.NavigationRailItem
 import androidx.compose.material.Text
@@ -19,7 +20,7 @@ fun BottomNavigationBar(navController: NavController) {
     BottomAppBar {
         val currentRoute = navController.currentBackStackEntry?.destination?.route
         items.forEach { screen ->
-            NavigationRailItem(
+            BottomNavigationItem(
                 icon = { Icon(screen.icon, contentDescription = screen.title) },
                 label = { Text(screen.title) },
                 selected = currentRoute == screen.route,

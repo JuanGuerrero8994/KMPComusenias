@@ -9,7 +9,7 @@ sealed class Destinations(val route: String) {
     data object AuthScreen : Destinations("authScreen")
 
     //SIGN UP SCREEN
-    data object SignUpScreen : Destinations("signUpScreen") {}
+    data object SignUpScreen : Destinations("signUpScreen")
 
 
 }

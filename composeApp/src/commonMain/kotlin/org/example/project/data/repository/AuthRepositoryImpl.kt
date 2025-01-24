@@ -53,10 +53,10 @@ class AuthRepositoryImpl(
                 )
 
                 // Guardar el usuario en Firestore
-               /* firestore.collection("USERS")
+                firestore.collection("USERS")
                     .document(responseUser.uid)
                     .update(responseUser)
-                    .set(responseUser)*/
+                    //.set(responseUser)
 
                 // Convertir el usuario al modelo de dominio y emitirlo
                 val user = UserMapper.toDomain(responseUser)

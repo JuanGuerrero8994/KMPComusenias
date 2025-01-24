@@ -82,7 +82,30 @@ fun OutlinedTextFieldComponent(
             }
         }
     } else if (isBirth) {
-        //DatePickerFieldToModal(onDateSelected = onValueChange)
+        var dialogState by remember { mutableStateOf(false) }
+
+//        if (dialogState) {
+//            DatePickerModal(onDateSelected = {
+//                onValueChange(it)
+//                dialogState = false
+//            }, onDismiss = { dialogState = false })
+//        }
+
+        OutlinedTextField(
+            value = value,
+            onValueChange = {},
+            label = { Text(label) },
+            readOnly = true,
+            modifier = Modifier.fillMaxWidth(),
+            trailingIcon = {
+                IconButton(onClick = { dialogState = true }) {
+                    Icon(
+                        painter = painterResource(Res.drawable.baseline_arrow_back_24),
+                        contentDescription = "Select Date"
+                    )
+                }
+            }
+        )
     } else {
         OutlinedTextField(
             value = value,
@@ -114,3 +137,21 @@ fun OutlinedTextFieldComponent(
     }
 }
 
+//@Composable
+//fun DatePickerModal(
+//    onDateSelected: (String) -> Unit,
+//    onDismiss: () -> Unit
+//) {
+//    val dialogState = rememberMaterialDialogState()
+//    val dateFormatter = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+//
+//    MaterialDialog(dialogState = dialogState, onCloseRequest = { onDismiss() }) {
+//        datepicker { date ->
+//            val formattedDate = dateFormatter.format(date)
+//            onDateSelected(formattedDate)
+//        }
+//    }
+//
+//    // Mostrar el modal
+//    dialogState.show()
+//}

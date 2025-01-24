@@ -9,15 +9,13 @@ import org.example.project.domain.repository.AuthRepository
 import org.example.project.domain.usecase.AuthUseCase
 import org.example.project.ui.screen.auth.AuthViewModel
 import org.koin.compose.viewmodel.dsl.viewModel
-import org.koin.compose.viewmodel.dsl.viewModelOf
-import org.koin.core.module.Module
 import org.koin.dsl.module
 
 private val dataModule = module {
     single { ErrorHandler() }
     single { Firebase.auth }
     single { Firebase.firestore }
-    single <AuthRepository> { AuthRepositoryImpl(get(), get(), get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(), get(),get()) }
 
 }
 
@@ -27,10 +25,8 @@ private val domainModule = module {
 
 
 private val viewModelModule = module {
-    viewModelOf(::AuthViewModel)
+    viewModel { AuthViewModel(get()) }
 }
-
-
 
 
 var sharedModules = listOf(domainModule, dataModule, viewModelModule)

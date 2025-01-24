@@ -18,6 +18,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavigationBar
 import kmpcomusenias.composeapp.generated.resources.Res
+import kmpcomusenias.composeapp.generated.resources.background_login
 import org.jetbrains.compose.resources.painterResource
 
 
@@ -52,12 +53,12 @@ fun ScaffoldComponent(
 
         // Colocamos el contenido del Scaffold
         Box(modifier = Modifier.fillMaxSize()) {
-            /*Image(
-                painter = painterResource(resource = Res.drawable.background_login),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize().zIndex(0f),
-                contentScale = ContentScale.Crop
-            )*/
+//            Image(
+//                painter = painterResource(resource = Res.drawable.background_login),
+//                contentDescription = null,
+//                modifier = Modifier.fillMaxSize().zIndex(0f),
+//                contentScale = ContentScale.Crop
+//            )
 
 
             Column(
