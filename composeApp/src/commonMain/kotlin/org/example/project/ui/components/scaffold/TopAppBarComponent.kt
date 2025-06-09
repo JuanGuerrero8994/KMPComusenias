@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Close
 
 @Composable
 fun TopAppBarComponent(onLogout:()-> Unit) {
@@ -27,7 +27,7 @@ fun TopAppBarComponent(onLogout:()-> Unit) {
         actions = {
             IconButton(onClick = onLogout) {
                 Icon(
-                    imageVector = Icons.Default.ExitToApp,
+                    imageVector = Icons.Default.Close,
                     contentDescription = "Cerrar sesión"
                 )
             }

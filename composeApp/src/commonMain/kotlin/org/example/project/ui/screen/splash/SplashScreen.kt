@@ -26,7 +26,7 @@ fun SplashScreen(navController: NavController, viewModel: AuthViewModel = koinVi
                 val user = (currentUser as Resource.Success<User?>).data
                 if (user != null) {
                     // Usuario autenticado, redirigir a HomeScreen
-                    navController.navigate(BottomNavScreen.Home.createRoute(user.displayName.toString())) {
+                    navController.navigate(BottomNavScreen.Home.route) {
                         popUpTo(BottomNavScreen.Home.route) { inclusive = true }
                     }
                 } else {

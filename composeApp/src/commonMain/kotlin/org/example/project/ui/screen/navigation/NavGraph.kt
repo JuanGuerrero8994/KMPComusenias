@@ -12,6 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
 import com.example.comuseniaskmm.android.ui.screen.home.HomeScreen
+import com.example.comuseniaskmm.android.ui.screen.profile.ProfileScreen
+import org.example.project.ui.screen.settings.SettingsScreen
 
 
 @Composable
@@ -29,19 +31,15 @@ fun NavGraph(navController: NavHostController) {
             SignUpScreen(navController)
         }
 
+        // Rutas simples
+        addRoute(navController, Destinations.SplashScreen.route) { SplashScreen(it) }
+        addRoute(navController, Destinations.AuthScreen.route) { AuthScreen(it) }
+        addRoute(navController, Destinations.SignUpScreen.route) { SignUpScreen(it) }
 
-        //BOTTOM NAVIGATION BAR
-
-        composable(
-            route = BottomNavScreen.Home.route,
-            arguments = listOf(navArgument("path") { type = NavType.StringType })
-        ) {
-            val path = it.arguments?.getString("path") ?: EMPTY_STRING
-            HomeScreen(navController = navController, path = path)
-        }
-
-
-
+        /*------------------BOTTOM NAVIGATION BAR-----------------------*/
+        addBottomNavRoute(navController,BottomNavScreen.Home.route){ HomeScreen(it) }
+        addBottomNavRoute(navController, BottomNavScreen.Profile.route) { ProfileScreen(it) }
+        addBottomNavRoute(navController, BottomNavScreen.Settings.route) { SettingsScreen(it) }
 
     }
 }

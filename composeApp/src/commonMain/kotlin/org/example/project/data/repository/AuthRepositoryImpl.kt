@@ -5,6 +5,7 @@ import org.example.project.domain.repository.AuthRepository
 import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import org.example.project.data.core.ErrorHandler
 import org.example.project.data.core.Resource
@@ -34,6 +35,9 @@ class AuthRepositoryImpl(
             val appError = errorHandler.getError(e)
             emit(Resource.Error(Exception(appError.message)))
         }
+    }.catch { e ->
+        val appError = errorHandler.getError(e)
+        emit(Resource.Error(Exception(appError.message)))
     }
 
     override suspend fun signUp(requestUser: RequestUser): Flow<Resource<User>> = flow {
@@ -53,10 +57,10 @@ class AuthRepositoryImpl(
                 )
 
                 // Guardar el usuario en Firestore
-               /* firestore.collection("USERS")
+                firestore.collection("USERS")
                     .document(responseUser.uid)
-                    .update(responseUser)
-                    .set(responseUser)*/
+                    //.update(responseUser)
+                    .set(responseUser)
 
                 // Convertir el usuario al modelo de dominio y emitirlo
                 val user = UserMapper.toDomain(responseUser)
@@ -69,8 +73,10 @@ class AuthRepositoryImpl(
             val appError = errorHandler.getError(e)
             emit(Resource.Error(Exception(appError.message)))
         }
+    }.catch { e ->
+        val appError = errorHandler.getError(e)
+        emit(Resource.Error(Exception(appError.message)))
     }
-
 
     override suspend fun signOut(): Flow<Resource<String>> = flow {
         emit(Resource.Loading)
@@ -82,6 +88,10 @@ class AuthRepositoryImpl(
             val appError = errorHandler.getError(e)
             emit(Resource.Error(Exception(appError.message)))
         }
+    }.catch { e ->
+        val appError = errorHandler.getError(e)
+        emit(Resource.Error(Exception(appError.message)))
+
     }
 
     override suspend fun getCurrentUser(): Flow<Resource<User?>> = flow {
@@ -99,5 +109,8 @@ class AuthRepositoryImpl(
             val appError = errorHandler.getError(e)
             emit(Resource.Error(Exception(appError.message)))
         }
+    }.catch { e ->
+        val appError = errorHandler.getError(e)
+        emit(Resource.Error(Exception(appError.message)))
     }
 }

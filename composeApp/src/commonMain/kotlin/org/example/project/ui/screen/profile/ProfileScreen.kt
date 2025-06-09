@@ -1,11 +1,10 @@
-package com.example.comuseniaskmm.android.ui.screen.home
+package com.example.comuseniaskmm.android.ui.screen.profile
 
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -21,19 +20,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
-import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.data.core.Resource
 import org.example.project.ui.components.custom_views.LoadingDialog
+import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.ui.screen.auth.AuthViewModel
 import org.example.project.ui.screen.navigation.Destinations
-
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinViewModel()) {
+fun ProfileScreen(navController: NavController, viewModel: AuthViewModel = koinViewModel()) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = FocusRequester()
@@ -43,8 +41,6 @@ fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinView
     val signOutResult by viewModel.signOutResult.collectAsState()
     var isLoading by remember { mutableStateOf(false) }
 
-    val displayName = viewModel.currentUserState.collectAsState()
-
     ScaffoldComponent(
         navController = navController,
         showTopBar = true,
@@ -52,20 +48,16 @@ fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinView
         onLogout = {
             isLoading = true // Activar carga
             viewModel.signOut()
-        },
-        floatingActionButton = null
+        }
+        , floatingActionButton = {}
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .pointerInput(Unit) { keyboardController?.hide() }
-                .focusRequester(
-                    focusRequester
-                ),
+            modifier = Modifier.fillMaxSize().pointerInput(Unit){keyboardController?.hide()}.focusRequester(
+                focusRequester),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Bienvenido! ${displayName.value}")
+            Text("Profile")
 
             // Mostrar el resultado del cierre de sesión
             ShowResult(
@@ -95,11 +87,11 @@ private fun ShowResult(
 
         is Resource.Success -> {
             !isLoading
-           LaunchedEffect(Unit) {
-               navController.navigate(Destinations.AuthScreen.route) {
-                   popUpTo(0) // Limpiar la pila de navegación
-               }
-           }
+            LaunchedEffect(Unit) {
+                navController.navigate(Destinations.AuthScreen.route) {
+                    popUpTo(0) // Limpiar la pila de navegación
+                }
+            }
 
         }
 

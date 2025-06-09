@@ -6,4 +6,8 @@ open class User (
     val email: String?,
     val displayName: String? = null,
     val rol: Rol?=null
-)
+){
+    override fun toString(): String {
+        return super.toString()
+    }
+}
