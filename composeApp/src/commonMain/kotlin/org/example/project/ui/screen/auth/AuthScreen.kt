@@ -1,21 +1,12 @@
 package org.example.project.ui.screen.auth
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,25 +24,21 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.comuseniaskmm.android.ui.components.auth.AuthenticationBottomContent
-import org.example.project.ui.components.auth.AuthenticationHeaderContent
-import org.example.project.ui.components.custom_views.LoadingDialog
-import org.example.project.ui.components.scaffold.ScaffoldComponent
-import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
-import kmpcomusenias.composeapp.generated.resources.Res
-import kmpcomusenias.composeapp.generated.resources.icon_email
 import org.example.project.data.core.Resource
-import org.example.project.data.model.auth.RequestUser
-import org.example.project.domain.model.auth.User
+import org.example.project.domain.model.user.User
 import org.example.project.ui.components.auth.AuthButton
+import org.example.project.ui.components.auth.AuthenticationHeaderContent
 import org.example.project.ui.components.auth.ForgetMyPasswordComponent
 import org.example.project.ui.components.auth.OutlinedTextFieldComponent
+import org.example.project.ui.components.customViews.LoadingDialog
+import org.example.project.ui.components.scaffold.ScaffoldComponent
+import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
 import org.example.project.ui.screen.navigation.Destinations
 import org.example.project.ui.theme.EMAIL_TEXT
 import org.example.project.ui.theme.HAVENT_ACCOUNT
 import org.example.project.ui.theme.LOGIN
 import org.example.project.ui.theme.PASSWORD
 import org.example.project.ui.theme.REGISTER
-import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -102,8 +89,8 @@ fun AuthScreen(navController: NavController, viewModel: AuthViewModel = koinView
 
             AuthButton(text = LOGIN, onClick = {
                 isLoading = true
-                val requestUser = RequestUser(email, password)
-                viewModel.signIn(requestUser)
+                val user = User(email = email, password = password)
+                viewModel.signIn(user)
             })
 
             Spacer(modifier = Modifier.height(8.dp))

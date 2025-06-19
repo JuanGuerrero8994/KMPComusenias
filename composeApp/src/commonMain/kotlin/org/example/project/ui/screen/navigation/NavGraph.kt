@@ -3,15 +3,12 @@ package org.example.project.ui.screen.navigation
 import org.example.project.ui.screen.auth.AuthScreen
 import org.example.project.ui.screen.auth.SignUpScreen
 import org.example.project.ui.screen.splash.SplashScreen
-import org.example.project.ui.theme.EMPTY_STRING
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
-import com.example.comuseniaskmm.android.ui.screen.home.HomeScreen
+import org.example.project.ui.screen.home.HomeScreen
 import com.example.comuseniaskmm.android.ui.screen.profile.ProfileScreen
 import org.example.project.ui.screen.settings.SettingsScreen
 

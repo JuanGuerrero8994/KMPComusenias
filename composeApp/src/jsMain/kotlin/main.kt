@@ -21,16 +21,6 @@ fun main() {
         )
     )
 
-//    const firebaseConfig = {
-//        apiKey: "AIzaSyDYQlxP100zz7jMiARWoevMFonG_SOzJMM",
-//        authDomain: "fir-kmm-98510.firebaseapp.com",
-//        projectId: "fir-kmm-98510",
-//        storageBucket: "fir-kmm-98510.firebasestorage.app",
-//        messagingSenderId: "835957728225",
-//        appId: "1:835957728225:web:20e75a9bbcca3360ea68a0",
-//        measurementId: "G-N6XB4EZ33Y"
-//    };
-
     onWasmReady {
         CanvasBasedWindow(canvasElementId = "ComposeTarget") {
             App()

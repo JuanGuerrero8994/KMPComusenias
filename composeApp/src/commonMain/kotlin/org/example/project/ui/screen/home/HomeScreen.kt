@@ -1,4 +1,4 @@
-package com.example.comuseniaskmm.android.ui.screen.home
+package org.example.project.ui.screen.home
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.data.core.Resource
-import org.example.project.ui.components.custom_views.LoadingDialog
+import org.example.project.ui.components.customViews.LoadingDialog
 import org.example.project.ui.screen.auth.AuthViewModel
 import org.example.project.ui.screen.navigation.Destinations
 
@@ -37,7 +37,6 @@ fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinView
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = FocusRequester()
-
 
     // Observar el resultado del cierre de sesión
     val signOutResult by viewModel.signOutResult.collectAsState()

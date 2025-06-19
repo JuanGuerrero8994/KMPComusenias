@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RequestUser(
-    val email: String,
-    val password: String,
+    val email: String?=null,
+    val password: String?=null,
     val displayName: String? = null,
     val isSpecialist: Boolean? = false,
     val phone: String? = null,

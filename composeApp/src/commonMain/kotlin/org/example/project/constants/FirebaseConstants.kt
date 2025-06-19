@@ -1,7 +1,7 @@
 package org.example.project.constants
 
 object FirebaseConstants {
-    const val USERS_COLLECTION = "Users"
+    const val USERS_COLLECTION = "USERS"
     const val CHILDREN_COLLECTION = "children"
     const val SPECIALIST_COLLECTION = "specialist"
     const val LETTERS_COLLECTION = "letters"

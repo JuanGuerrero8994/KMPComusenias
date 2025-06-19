@@ -21,7 +21,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import org.example.project.data.core.Resource
-import org.example.project.ui.components.custom_views.LoadingDialog
+import org.example.project.ui.components.customViews.LoadingDialog
 import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.ui.screen.auth.AuthViewModel
 import org.example.project.ui.screen.navigation.Destinations

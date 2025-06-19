@@ -1,30 +1,30 @@
 package org.example.project.data.repository
 
-
 import org.example.project.domain.repository.AuthRepository
 import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import org.example.project.constants.FirebaseConstants.USERS_COLLECTION
 import org.example.project.data.core.ErrorHandler
 import org.example.project.data.core.Resource
 import org.example.project.data.mapper.UserMapper
-import org.example.project.data.model.auth.RequestUser
 import org.example.project.data.model.auth.ResponseUser
-import org.example.project.domain.model.auth.Rol
-import org.example.project.domain.model.auth.User
+import org.example.project.domain.model.user.Rol
+import org.example.project.domain.model.user.User
 
 class AuthRepositoryImpl(
     private val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
-    private val errorHandler: ErrorHandler // Agregar ErrorHandler como parámetro
+    private val errorHandler: ErrorHandler
 ) : AuthRepository {
 
-    override suspend fun signIn(requestUser: RequestUser): Flow<Resource<User>> = flow {
+    override suspend fun signIn(user: User): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
         try {
-            val authResult = firebaseAuth.signInWithEmailAndPassword(requestUser.email, requestUser.password)
+            val requestUser = UserMapper.toRequestUser(user)
+            val authResult = firebaseAuth.signInWithEmailAndPassword(requestUser.email!!, requestUser.password!!)
             val firebaseUser = authResult.user
 
             val responseUser = UserMapper.toResponseUser(firebaseUser!!)
@@ -40,12 +40,12 @@ class AuthRepositoryImpl(
         emit(Resource.Error(Exception(appError.message)))
     }
 
-    override suspend fun signUp(requestUser: RequestUser): Flow<Resource<User>> = flow {
+    override suspend fun signUp(user: User): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
         try {
 
-            // Usar createUserWithEmailAndPassword para crear un nuevo usuario
-            val authResult = firebaseAuth.createUserWithEmailAndPassword(requestUser.email, requestUser.password)
+            val requestUser = UserMapper.toRequestUser(user)
+            val authResult = firebaseAuth.createUserWithEmailAndPassword(requestUser.email!!, requestUser.password!!)
             val firebaseUser = authResult.user
 
             if (firebaseUser != null) {
@@ -57,10 +57,10 @@ class AuthRepositoryImpl(
                 )
 
                 // Guardar el usuario en Firestore
-                firestore.collection("USERS")
+                firestore.collection(USERS_COLLECTION)
                     .document(responseUser.uid)
-                    //.update(responseUser)
-                    .set(responseUser)
+                    .update(responseUser)
+                    //.set(responseUser)
 
                 // Convertir el usuario al modelo de dominio y emitirlo
                 val user = UserMapper.toDomain(responseUser)

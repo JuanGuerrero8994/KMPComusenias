@@ -1,11 +1,7 @@
-package org.example.project
-
-import org.koin.compose.viewmodel.dsl.viewModelOf
-import org.koin.dsl.module
+import org.example.project.Platform
 
 class JsPlatform: Platform {
     override val name: String = "Web with Kotlin/Js"
 }
 
-actual fun getPlatform(): Platform = JsPlatform()
 

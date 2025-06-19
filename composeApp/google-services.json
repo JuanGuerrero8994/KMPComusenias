@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "355578520678",
-    "project_id": "comuseniaskmp",
-    "storage_bucket": "comuseniaskmp.firebasestorage.app"
+    "project_number": "835957728225",
+    "project_id": "fir-kmm-98510",
+    "storage_bucket": "fir-kmm-98510.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:355578520678:android:8b06414a5f37872a1639a7",
+        "mobilesdk_app_id": "1:835957728225:android:65ae3ea7a68b8b35ea68a0",
         "android_client_info": {
           "package_name": "org.example.project"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyADpxgtlNqgW48VlU493InAebnb9cE_xtQ"
+          "current_key": "AIzaSyA67a1VhVlIHgNb_Nej2DKJ4vsKqqEoEvM"
         }
       ],
       "services": {

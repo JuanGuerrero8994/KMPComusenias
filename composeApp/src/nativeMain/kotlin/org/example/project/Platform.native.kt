@@ -1,28 +1,17 @@
 package org.example.project
 
-import androidx.lifecycle.viewmodel.compose.viewModel
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import org.example.project.ui.screen.auth.AuthViewModel
-import org.koin.compose.viewmodel.dsl.viewModelOf
-import org.koin.core.module.Module
-import org.koin.dsl.module
-
-class JVMPlatform: Platform {
-    override val name: String = "Java ${System.getProperty("java.version")}"
-}
-
-actual fun getPlatform(): Platform = JVMPlatform()
 
 actual fun createHttpClient(): HttpClient {
-    return HttpClient(CIO) {
+
+    return HttpClient() {
         install(ContentNegotiation) {
             json(Json { ignoreUnknownKeys = true })
         }
@@ -30,7 +19,7 @@ actual fun createHttpClient(): HttpClient {
             level = LogLevel.ALL
             logger = object : Logger {
                 override fun log(message: String) {
-                    Napier.v(tag = "HttpClient - Desktop", message = message)
+                    Napier.v(tag = "HttpClient", message = message)
                 }
             }
         }

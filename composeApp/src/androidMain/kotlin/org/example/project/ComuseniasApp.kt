@@ -13,8 +13,6 @@ class ComuseniasApp: Application() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
         startKoin {
-            //androidLogger() // Activa logs
-            //androidContext(this@ComuseniasApp) // Contexto para Android
             modules(sharedModules)
         }
 

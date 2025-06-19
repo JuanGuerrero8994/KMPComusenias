@@ -1,4 +1,4 @@
-package org.example.project.ui.components.custom_views
+package org.example.project.ui.components.customViews
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

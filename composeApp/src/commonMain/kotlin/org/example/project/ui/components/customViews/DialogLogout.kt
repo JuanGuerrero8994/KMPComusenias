@@ -1,4 +1,4 @@
-package com.example.comuseniaskmm.android.ui.components.custom_views
+package org.example.project.ui.components.customViews
 
 
 import androidx.compose.material.AlertDialog

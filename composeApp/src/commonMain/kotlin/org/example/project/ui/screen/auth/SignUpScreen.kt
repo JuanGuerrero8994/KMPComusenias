@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,11 +24,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kmpcomusenias.composeapp.generated.resources.Res
 import kmpcomusenias.composeapp.generated.resources.mail_icon
-import org.example.project.ui.components.custom_views.LoadingDialog
+import org.example.project.ui.components.customViews.LoadingDialog
 import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.data.core.Resource
-import org.example.project.data.model.auth.RequestUser
-import org.example.project.domain.model.auth.User
+import org.example.project.domain.model.user.Children
+import org.example.project.domain.model.user.Specialist
+import org.example.project.domain.model.user.User
 import org.example.project.ui.components.auth.AuthButton
 import org.example.project.ui.components.auth.AuthenticationHeaderContent
 import org.example.project.ui.components.auth.CheckBoxComponent
@@ -85,7 +87,25 @@ fun SignUpScreen(navController: NavController, viewModel: AuthViewModel = koinVi
 
             AuthButton(text = "Registrar", isEnabled = !isLoading, onClick = {
                 isLoading = true
-                viewModel.signUp(RequestUser(email, password, fullName, isSpecialist, phone, birthDate, selectedSpecialty))
+                val user: User = if (isSpecialist) {
+                    Specialist(
+                        idSpecialist = "",
+                        speciality = selectedSpecialty,
+                        childrenInCharge = emptyList(),
+                        email = email,
+                        password = password,
+                        displayName = fullName
+                    )
+                } else {
+                    Children(
+                        idChildren = "",
+                        isPremium = true,
+                        email = email,
+                        password = password,
+                        displayName = fullName
+                    )
+                }
+                viewModel.signUp(user)
             })
 
             ShowResults(signUpResult, isLoading, navController)
@@ -99,6 +119,7 @@ private fun ShowResults(signInResult: Resource<User>, isLoading: Boolean, navCon
     when (signInResult) {
         is Resource.Loading -> LoadingDialog(isLoading = isLoading)
         is Resource.Success -> { navController.navigateUp() }
-        is Resource.Error -> {}
+        is Resource.Error -> {Text(text = "${signInResult.exception.message}") }
     }
 }
+

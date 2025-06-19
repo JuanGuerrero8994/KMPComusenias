@@ -8,13 +8,5 @@ import org.example.project.di.initKoin
 import org.example.project.ui.App
 
 fun MainViewController() = ComposeUIViewController {
-    initKoin()
-    Firebase.initialize(
-        options = FirebaseOptions(
-            applicationId ="1:835957728225:ios:8de8ba09426583ccea68a0",
-            apiKey = "AIzaSyBu7iRCfhGzyIEtI7HN9s43v2Pe42nlCxg",
-            projectId = "fir-kmm-98510"
-        )
-    )
     App()
 }
