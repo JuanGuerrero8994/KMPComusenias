@@ -8,4 +8,9 @@ open class User(
     open val password: String? = null,
     open val displayName: String? = null,
     open val rol: Rol? = null
-)
+){
+    override fun toString(): String {
+        return "User(email=$email, displayName=$displayName, rol=$rol)"
+    }
+}
+

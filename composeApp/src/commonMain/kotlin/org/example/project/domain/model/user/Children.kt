@@ -14,4 +14,8 @@ data class Children(
     password = password,
     displayName = displayName,
     rol = Rol.CHILDREN
-)
+){
+    override fun toString(): String {
+        return "Children(idChildren=$idChildren, isPremium=$isPremium, email=$email, displayName=$displayName)"
+    }
+}

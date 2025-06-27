@@ -1,4 +1,4 @@
-package com.example.comuseniaskmm.android.ui.screen.profile
+package org.example.project.ui.screen.profile
 
 
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +21,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import org.example.project.data.core.Resource
+import org.example.project.ui.base.HandleResourceState
 import org.example.project.ui.components.customViews.LoadingDialog
 import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.ui.screen.auth.AuthViewModel
@@ -36,71 +37,43 @@ fun ProfileScreen(navController: NavController, viewModel: AuthViewModel = koinV
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = FocusRequester()
 
-
     // Observar el resultado del cierre de sesión
     val signOutResult by viewModel.signOutResult.collectAsState()
-    var isLoading by remember { mutableStateOf(false) }
+    val isLoading =viewModel.loading.collectAsState()
+
+    val displayName = viewModel.currentUserState.collectAsState()
 
     ScaffoldComponent(
         navController = navController,
         showTopBar = true,
         showBottomBar = true,
-        onLogout = {
-            isLoading = true // Activar carga
-            viewModel.signOut()
-        }
-        , floatingActionButton = {}
+        onLogout = { viewModel.signOut() },
+        floatingActionButton = null
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().pointerInput(Unit){keyboardController?.hide()}.focusRequester(
-                focusRequester),
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) { keyboardController?.hide() }
+                .focusRequester(
+                    focusRequester
+                ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Profile")
+            Text("Bienvenido! ${displayName.value}")
+
 
             // Mostrar el resultado del cierre de sesión
-            ShowResult(
-                signOutResult = signOutResult,
+            HandleResourceState(
+                resource = signOutResult,
                 isLoading = isLoading,
-                onDismissLoading = { isLoading = false },
-                navController = navController
+                onSuccess = {   navController.navigate(Destinations.SplashScreen.route) {
+                    popUpTo(0) { inclusive = true } // Limpia el back stack
+                    launchSingleTop = true
+                } },
             )
 
         }
     }
 }
 
-@Composable
-private fun ShowResult(
-    signOutResult: Resource<String>,
-    isLoading: Boolean,
-    onDismissLoading: () -> Unit,
-    navController: NavController
-) {
-    when (signOutResult) {
-        is Resource.Loading -> {
-            LoadingDialog(
-                isLoading = isLoading,
-            )
-        }
-
-        is Resource.Success -> {
-            !isLoading
-            LaunchedEffect(Unit) {
-                navController.navigate(Destinations.AuthScreen.route) {
-                    popUpTo(0) // Limpiar la pila de navegación
-                }
-            }
-
-        }
-
-        is Resource.Error -> {
-            // Mostrar mensaje de error
-            Text(
-                text = "Error: ${(signOutResult.exception.message ?: "Desconocido")}",
-                color = Color.Red
-            )
-        }
-    }
-}

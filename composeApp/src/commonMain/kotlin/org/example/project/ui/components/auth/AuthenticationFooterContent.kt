@@ -1,4 +1,4 @@
-package com.example.comuseniaskmm.android.ui.components.auth
+package org.example.project.ui.components.auth
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,11 +24,11 @@ import org.example.project.ui.theme.primaryColorApp
 
 
 @Composable
-fun AuthenticationBottomContent(
+fun AuthenticationFooterContent(
     textOne: String,
     textTwo: String,
-    navController: NavController
-) {
+    onClickText: () -> Unit = {},
+    ) {
 
     Row(
         modifier = Modifier.fillMaxWidth().padding(16.dp),
@@ -42,8 +42,7 @@ fun AuthenticationBottomContent(
         )
         Spacer(modifier = Modifier.width(SIZE5.dp))
         Text(
-            modifier = Modifier.testTag("textclickfooter").clickable { navController.navigate(
-                Destinations.SignUpScreen.route)},
+            modifier = Modifier.testTag("textclickfooter").clickable { onClickText()},
             text = textTwo,
             color = primaryColorApp,
             fontSize = SIZE14.sp,

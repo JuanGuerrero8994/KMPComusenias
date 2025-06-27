@@ -1,6 +1,7 @@
 package org.example.project.ui.components.scaffold
 
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,9 +12,13 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import kmpcomusenias.composeapp.generated.resources.Res
+import kmpcomusenias.composeapp.generated.resources.background_login
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavigationBar
+import org.jetbrains.compose.resources.painterResource
 
 
 @Composable
@@ -42,18 +47,16 @@ fun ScaffoldComponent(
            }
         },
         floatingActionButton = floatingActionButton ?: {}, // Asignamos el parámetro FAB aquí
-        contentColor = Color.Transparent // Aquí eliminamos el fondo del Scaffold
     ) { innerPadding ->
 
         // Colocamos el contenido del Scaffold
         Box(modifier = Modifier.fillMaxSize()) {
-            /*Image(
+            Image(
                 painter = painterResource(resource = Res.drawable.background_login),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize().zIndex(0f),
                 contentScale = ContentScale.Crop
-            )*/
-
+            )
 
             Column(
                 modifier = Modifier

@@ -1,9 +1,9 @@
 package org.example.project
 
 import android.os.Build
+import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -19,7 +19,7 @@ actual fun getPlatform(): Platform = AndroidPlatform()
 
 
 actual fun createHttpClient(): HttpClient {
-    return HttpClient(CIO) {
+    return HttpClient() {
         install(ContentNegotiation) {
             json(Json { ignoreUnknownKeys = true })
         }
@@ -32,4 +32,8 @@ actual fun createHttpClient(): HttpClient {
             }
         }
     }
+}
+
+actual fun initLogger() {
+    Napier.base(DebugAntilog())
 }

@@ -12,6 +12,7 @@ class ComuseniasApp: Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
+        initLogger()
         startKoin {
             modules(sharedModules)
         }

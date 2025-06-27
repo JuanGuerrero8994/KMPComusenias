@@ -4,5 +4,6 @@ enum class AuthAction {
     SIGN_IN,
     SIGN_UP,
     SIGN_OUT,
-    GET_CURRENT_USER
+    GET_CURRENT_USER,
+    RESET_PASSWORD
 }

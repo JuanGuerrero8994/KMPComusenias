@@ -1,13 +1,12 @@
 package org.example.project.ui.components.auth
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ExposedDropdownMenuBox
@@ -21,23 +20,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import kmpcomusenias.composeapp.generated.resources.Res
 import kmpcomusenias.composeapp.generated.resources.baseline_arrow_back_24
-import org.jetbrains.compose.resources.painterResource
 import kmpcomusenias.composeapp.generated.resources.visibility
 import kmpcomusenias.composeapp.generated.resources.visibility_off
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.Clock
-import kotlinx.datetime.DatePeriod
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.minus
-import kotlinx.datetime.plus
-import kotlinx.datetime.toLocalDateTime
-
+import org.example.project.ui.components.customViews.DatePickerDialog
+import org.jetbrains.compose.resources.painterResource
+import kotlin.text.padStart
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -53,163 +50,140 @@ fun OutlinedTextFieldComponent(
     dropdownOptions: List<String> = emptyList(),
     onDropdownItemSelected: ((String) -> Unit)? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
-    trailingIcon: (@Composable () -> Unit)? = null
+    trailingIcon: (@Composable () -> Unit)? = null,
+    errorText: String? = null
 ) {
     var passwordVisibility by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
     var showDatePicker by remember { mutableStateOf(false) }
 
-    if (isDropdown) {
-        var selectedOption by remember { mutableStateOf(value) }
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
-        ) {
-            OutlinedTextField(
-                value = selectedOption,
-                onValueChange = {},
-                label = { Text(label) },
-                readOnly = true,
-                modifier = Modifier.fillMaxWidth(),
-                trailingIcon = {
-                    IconButton(onClick = { expanded = !expanded }) {
-                        Icon(
-                            painter = painterResource(resource = Res.drawable.baseline_arrow_back_24),
-                            contentDescription = "Dropdown arrow"
-                        )
-                    }
-                }
-            )
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                dropdownOptions.forEach { option ->
-                    DropdownMenuItem(
-                        onClick = {
-                            selectedOption = option
-                            onDropdownItemSelected?.invoke(option)
-                            expanded = false
+    Column(modifier = Modifier.fillMaxWidth()) {
+        when {
+            isDropdown -> {
+                var selectedOption by remember { mutableStateOf(value) }
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = { expanded = !expanded }
+                ) {
+                    OutlinedTextField(
+                        value = selectedOption,
+                        onValueChange = {},
+                        label = { Text(label) },
+                        readOnly = true,
+                        isError = !errorText.isNullOrEmpty(),
+                        modifier = Modifier.fillMaxWidth(),
+                        trailingIcon = {
+                            IconButton(onClick = { expanded = !expanded }) {
+                                Icon(
+                                    painter = painterResource(resource = Res.drawable.baseline_arrow_back_24),
+                                    contentDescription = "Dropdown arrow"
+                                )
+                            }
                         }
+                    )
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
                     ) {
-                        Text(option)
+                        dropdownOptions.forEach { option ->
+                            DropdownMenuItem(
+                                onClick = {
+                                    selectedOption = option
+                                    onDropdownItemSelected?.invoke(option)
+                                    expanded = false
+                                }
+                            ) {
+                                Text(option)
+                            }
+                        }
                     }
                 }
             }
-        }
-    } else if (isBirth) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = {},
-            label = { Text(label) },
-            readOnly = true,
-            modifier = Modifier
-                .fillMaxWidth()
-                .pointerInput(Unit) {
-                    detectTapGestures { showDatePicker = true }
-                }
-        )
 
-        if (showDatePicker) {
-            DatePickerDialog(
-                initialDate = value.toLocalDateOrNull() ?: currentLocalDate(),
-                onDateSelected = {
-                    val formatted = it.toFormattedString()
-                    onValueChange(formatted)
-                    showDatePicker = false
-                },
-                onDismissRequest = { showDatePicker = false }
+            isBirth -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { showDatePicker = true } // Esto sí se dispara
+                ) {
+                    OutlinedTextField(
+                        value = value,
+                        onValueChange = {},
+                        label = { Text(label) },
+                        readOnly = true,
+                        enabled = false, // 🔑 Para que no capture el foco ni bloquee clics
+                        isError = !errorText.isNullOrEmpty(),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                if (showDatePicker) {
+                    DatePickerDialog(
+                        onDismiss = { showDatePicker = false },
+                        onDateSelected = { localDate ->
+                            onValueChange(localDate.toBirthDateString())
+                            showDatePicker = false
+                        }
+                    )
+                }
+            }
+
+
+            else -> {
+                OutlinedTextField(
+                    value = value,
+                    onValueChange = { onValueChange(it) },
+                    label = { Text(label) },
+                    singleLine = true,
+                    isError = !errorText.isNullOrEmpty(),
+                    modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = if (isPassword && !passwordVisibility)
+                        PasswordVisualTransformation()
+                    else
+                        VisualTransformation.None,
+                    trailingIcon = trailingIcon ?: if (isPassword) {
+                        {
+                            IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                                Icon(
+                                    painter = painterResource(
+                                        resource = if (passwordVisibility)
+                                            Res.drawable.visibility
+                                        else
+                                            Res.drawable.visibility_off
+                                    ),
+                                    contentDescription = if (passwordVisibility) "Hide password" else "Show password"
+                                )
+                            }
+                        }
+                    } else null,
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        keyboardType = when {
+                            isPhone -> KeyboardType.Phone
+                            isPassword -> KeyboardType.Password
+                            else -> keyboardType
+                        }
+                    )
+                )
+            }
+        }
+
+        if (!errorText.isNullOrEmpty()) {
+            Text(
+                text = errorText,
+                color = Color.Red,
+                modifier = Modifier
+                    .padding(start = 16.dp, top = 4.dp),
+                textAlign = TextAlign.Start
             )
         }
-    } else {
-        OutlinedTextField(
-            value = value,
-            onValueChange = { onValueChange(it) },
-            label = { Text(label) },
-            singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = if (isPassword && !passwordVisibility) PasswordVisualTransformation() else VisualTransformation.None,
-            trailingIcon = trailingIcon ?: if (isPassword) {
-                {
-                    IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
-                        Icon(
-                            painter = painterResource(
-                                resource = if (passwordVisibility) Res.drawable.visibility else Res.drawable.visibility_off
-                            ),
-                            contentDescription = if (passwordVisibility) "Hide password" else "Show password"
-                        )
-                    }
-                }
-            } else null,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = when {
-                    isPhone -> KeyboardType.Phone
-                    isPassword -> KeyboardType.Password
-                    else -> keyboardType
-                }
-            )
-        )
     }
 }
 
 
-@Composable
-fun DatePickerDialog(
-    initialDate: LocalDate = currentLocalDate(),
-    onDateSelected: (LocalDate) -> Unit,
-    onDismissRequest: () -> Unit
-) {
-    val selectedDate = remember { mutableStateOf(initialDate) }
 
-    AlertDialog(
-        onDismissRequest = onDismissRequest,
-        confirmButton = {
-            Button(onClick = { onDateSelected(selectedDate.value) }) {
-                Text("OK")
-            }
-        },
-        dismissButton = {
-            Button(onClick = onDismissRequest) {
-                Text("Cancelar")
-            }
-        },
-        title = { Text("Selecciona una fecha") },
-        text = {
-            Column {
-                Text("Fecha: ${selectedDate.value}") // o aplicar un formateo personalizado
-                Row(horizontalArrangement = Arrangement.SpaceBetween) {
-                    Button(onClick = {
-                        selectedDate.value = selectedDate.value.minus(DatePeriod(days = 1))
-                    }) {
-                        Text("-1 día")
-                    }
-                    Button(onClick = {
-                        selectedDate.value = selectedDate.value.plus(DatePeriod(days = 1))
-                    }) {
-                        Text("+1 día")
-                    }
-                }
-            }
-        }
-    )
-}
-
-fun currentLocalDate(): LocalDate = Clock.System.now()
-    .toLocalDateTime(TimeZone.currentSystemDefault()).date
-
-
-fun LocalDate.toFormattedString(): String =
-    "${dayOfMonth.toString().padStart(2, '0')}/${monthNumber.toString().padStart(2, '0')}/$year"
-
-fun String.toLocalDateOrNull(): LocalDate? {
-    return try {
-        val parts = this.split("/")
-        if (parts.size != 3) return null
-        val day = parts[0].toInt()
-        val month = parts[1].toInt()
-        val year = parts[2].toInt()
-        LocalDate(year, month, day)
-    } catch (e: Exception) {
-        null
-    }
+fun LocalDate.toBirthDateString(): String {
+    val year = this.year
+    val month = this.monthNumber.toString().padStart(2, '0')
+    val day = this.dayOfMonth.toString().padStart(2, '0')
+    return "$year-$month-$day" // Ejemplo: 2023-04-15
 }

@@ -3,6 +3,7 @@ package org.example.project.data.repository
 import org.example.project.domain.repository.AuthRepository
 import dev.gitlive.firebase.auth.FirebaseAuth
 import dev.gitlive.firebase.firestore.FirebaseFirestore
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -30,20 +31,21 @@ class AuthRepositoryImpl(
             val responseUser = UserMapper.toResponseUser(firebaseUser!!)
             val user = UserMapper.toDomain(responseUser)
             emit(Resource.Success(user))
+
         } catch (e: Exception) {
-            // Manejar errores utilizando ErrorHandler
             val appError = errorHandler.getError(e)
+            Napier.e("❌ Error detectado en signIn: ${appError.message}", e)
             emit(Resource.Error(Exception(appError.message)))
         }
     }.catch { e ->
         val appError = errorHandler.getError(e)
+        Napier.e("❌ Error inesperado en signIn (catch): ${appError.message}", e)
         emit(Resource.Error(Exception(appError.message)))
     }
 
     override suspend fun signUp(user: User): Flow<Resource<User>> = flow {
         emit(Resource.Loading)
         try {
-
             val requestUser = UserMapper.toRequestUser(user)
             val authResult = firebaseAuth.createUserWithEmailAndPassword(requestUser.email!!, requestUser.password!!)
             val firebaseUser = authResult.user
@@ -53,28 +55,28 @@ class AuthRepositoryImpl(
                     uid = firebaseUser.uid,
                     email = firebaseUser.email ?: "",
                     displayName = requestUser.displayName ?: "",
-                    rol= (if (requestUser.isSpecialist!!) Rol.SPECIALIST else Rol.CHILDREN).toString()
+                    rol = (if (requestUser.isSpecialist!!) Rol.SPECIALIST else Rol.CHILDREN).toString()
                 )
 
-                // Guardar el usuario en Firestore
+                // ✅ Reemplazamos update() por set() para crear el documento si no existe
                 firestore.collection(USERS_COLLECTION)
                     .document(responseUser.uid)
-                    .update(responseUser)
-                    //.set(responseUser)
+                    .set(responseUser)
 
-                // Convertir el usuario al modelo de dominio y emitirlo
                 val user = UserMapper.toDomain(responseUser)
                 emit(Resource.Success(user))
             } else {
+                Napier.e("❌ Error al crear el usuario: FirebaseUser es null")
                 emit(Resource.Error(Exception("Error al crear el usuario.")))
             }
         } catch (e: Exception) {
-            // Manejar errores utilizando ErrorHandler
             val appError = errorHandler.getError(e)
+            Napier.e("❌ Error detectado en signUp: ${appError.message}", e)
             emit(Resource.Error(Exception(appError.message)))
         }
     }.catch { e ->
         val appError = errorHandler.getError(e)
+        Napier.e("❌ Error inesperado en signUp (catch): ${appError.message}", e)
         emit(Resource.Error(Exception(appError.message)))
     }
 
@@ -84,14 +86,14 @@ class AuthRepositoryImpl(
             firebaseAuth.signOut()
             emit(Resource.Success("Sesión cerrada exitosamente"))
         } catch (e: Exception) {
-            // Manejar errores utilizando ErrorHandler
             val appError = errorHandler.getError(e)
+            Napier.e("❌ Error detectado en signOut: ${appError.message}", e)
             emit(Resource.Error(Exception(appError.message)))
         }
     }.catch { e ->
         val appError = errorHandler.getError(e)
+        Napier.e("❌ Error inesperado en signOut (catch): ${appError.message}", e)
         emit(Resource.Error(Exception(appError.message)))
-
     }
 
     override suspend fun getCurrentUser(): Flow<Resource<User?>> = flow {
@@ -107,10 +109,28 @@ class AuthRepositoryImpl(
             }
         } catch (e: Exception) {
             val appError = errorHandler.getError(e)
+            Napier.e("❌ Error detectado en getCurrentUser: ${appError.message}", e)
             emit(Resource.Error(Exception(appError.message)))
         }
     }.catch { e ->
         val appError = errorHandler.getError(e)
+        Napier.e("❌ Error inesperado en getCurrentUser (catch): ${appError.message}", e)
+        emit(Resource.Error(Exception(appError.message)))
+    }
+
+    override suspend fun resetPassword(email: String): Flow<Resource<String>> = flow {
+        emit(Resource.Loading)
+        try {
+            firebaseAuth.sendPasswordResetEmail(email)
+            emit(Resource.Success("Correo de restablecimiento enviado correctamente"))
+        } catch (e: Exception) {
+            val appError = errorHandler.getError(e)
+            Napier.e("❌ Error detectado en resetPassword: ${appError.message}", e)
+            emit(Resource.Error(Exception(appError.message)))
+        }
+    }.catch { e ->
+        val appError = errorHandler.getError(e)
+        Napier.e("❌ Error inesperado en resetPassword (catch): ${appError.message}", e)
         emit(Resource.Error(Exception(appError.message)))
     }
 }

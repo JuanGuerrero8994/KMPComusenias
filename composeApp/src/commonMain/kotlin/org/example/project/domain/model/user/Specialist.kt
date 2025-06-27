@@ -14,4 +14,8 @@ data class Specialist(
     password = password,
     displayName = displayName,
     rol = Rol.SPECIALIST
-)
+){
+    override fun toString(): String {
+        return "Specialist(idSpecialist=$idSpecialist, speciality=$speciality, childrenInCharge=$childrenInCharge, email=$email, displayName=$displayName)"
+    }
+}

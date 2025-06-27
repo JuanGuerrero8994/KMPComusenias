@@ -19,29 +19,35 @@ import org.koin.core.annotation.KoinExperimentalAPI
 fun SplashScreen(navController: NavController, viewModel: AuthViewModel = koinViewModel()) {
     val currentUser by viewModel.currentUserState.collectAsState()
 
+    LaunchedEffect(Unit) {
+        viewModel.checkCurrentUser()
+    }
 
     LaunchedEffect(currentUser) {
         when (currentUser) {
-            is Resource.Loading -> {}
+            is Resource.Loading -> {} // Mostrá una animación si querés
             is Resource.Success -> {
                 val user = (currentUser as Resource.Success<User?>).data
                 if (user != null) {
-                    // Usuario autenticado, redirigir a HomeScreen
                     navController.navigate(BottomNavScreen.Home.route) {
-                        popUpTo(BottomNavScreen.Home.route) { inclusive = true }
+                        popUpTo(0) { inclusive = true } // limpia todo el backstack
+                        launchSingleTop = true
                     }
                 } else {
-                    // No hay usuario autenticado, redirigir a AuthScreen
                     navController.navigate(Destinations.AuthScreen.route) {
-                        popUpTo(Destinations.AuthScreen.route) { inclusive = true }
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
                     }
                 }
             }
 
-            is Resource.Error -> {}
-
+            is Resource.Error -> {
+                // Podés loguear o mostrar error si querés
+                navController.navigate(Destinations.AuthScreen.route) {
+                    popUpTo(0) { inclusive = true }
+                    launchSingleTop = true
+                }
+            }
         }
     }
-
-
 }

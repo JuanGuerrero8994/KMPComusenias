@@ -3,26 +3,19 @@ package org.example.project.data.core
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidCredentialsException
 import dev.gitlive.firebase.auth.FirebaseAuthInvalidUserException
 import dev.gitlive.firebase.auth.FirebaseAuthUserCollisionException
+import io.github.aakira.napier.Napier
 
-
-// Paquete: core
 class ErrorHandler {
 
-    /**
-     * Función para manejar excepciones y retornarlas como mensajes comprensibles o excepciones custom.
-     */
     fun getError(throwable: Throwable): AppError {
-        return when (throwable) {
-
-            // Errores de Firebase
+        val appError = when (throwable) {
             is FirebaseAuthInvalidUserException -> AppError.UserNotFoundError
             is FirebaseAuthInvalidCredentialsException -> AppError.InvalidCredentialsError
             is FirebaseAuthUserCollisionException -> AppError.UserAlreadyExistsError
-
-
-            // Errores generales (o no manejados)
             else -> AppError.UnknownError
         }
+        Napier.e("❌ ${appError.message} | Firebase: ${throwable.message}", throwable)
+        return appError
     }
 }
 

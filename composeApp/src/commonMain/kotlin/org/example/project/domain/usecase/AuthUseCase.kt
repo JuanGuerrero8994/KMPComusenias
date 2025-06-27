@@ -7,11 +7,12 @@ import org.example.project.data.core.Resource
 import org.example.project.domain.model.user.User
 
 class AuthUseCase(private val repository: AuthRepository) {
-    suspend operator fun invoke(action: AuthAction, user: User? = null): Flow<Resource<Any?>> =
+    suspend operator fun invoke(action: AuthAction, data: Any? = null): Flow<Resource<Any?>> =
         when (action) {
-            AuthAction.SIGN_IN -> { repository.signIn(user!!) }
-            AuthAction.SIGN_UP -> { repository.signUp(user!!) }
+            AuthAction.SIGN_IN -> { repository.signIn(data as User) }
+            AuthAction.SIGN_UP -> { repository.signUp(data as User) }
             AuthAction.SIGN_OUT -> {repository.signOut()}
             AuthAction.GET_CURRENT_USER -> {repository.getCurrentUser()}
+            AuthAction.RESET_PASSWORD -> {repository.resetPassword(data as String)}
         }
 }

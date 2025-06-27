@@ -9,4 +9,6 @@ interface AuthRepository {
     suspend fun signUp(user: User): Flow<Resource<User>>
     suspend fun signOut(): Flow<Resource<String>>
     suspend fun getCurrentUser():Flow<Resource<User?>>
+    suspend fun resetPassword(email: String): Flow<Resource<String>>
+
 }

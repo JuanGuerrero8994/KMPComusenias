@@ -12,6 +12,7 @@ open class BaseViewModel:ViewModel() {
     protected fun <T> fetchData(
         flowCollector: MutableStateFlow<Resource<T>>,
         block: suspend () -> Flow<Resource<T>>
+
     ) {
         viewModelScope.launch {
             block().collect {
