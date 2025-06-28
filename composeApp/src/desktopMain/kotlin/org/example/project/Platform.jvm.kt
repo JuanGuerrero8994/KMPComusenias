@@ -1,8 +1,13 @@
 package org.example.project
 
+import androidx.compose.runtime.Composable
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.FirebaseOptions
+import dev.gitlive.firebase.initialize
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
@@ -17,7 +22,7 @@ class JVMPlatform: Platform {
 actual fun getPlatform(): Platform = JVMPlatform()
 
 actual fun createHttpClient(): HttpClient {
-    return HttpClient() {
+    return HttpClient(CIO) {
         install(ContentNegotiation) {
             json(Json { ignoreUnknownKeys = true })
         }
@@ -29,9 +34,16 @@ actual fun createHttpClient(): HttpClient {
                 }
             }
         }
+        initLogger()
     }
 }
 
 actual fun initLogger(){
     Napier.base(DebugAntilog())
+}
+
+actual fun isAndroid(): Boolean  = false
+
+@Composable
+actual fun CameraView() {
 }

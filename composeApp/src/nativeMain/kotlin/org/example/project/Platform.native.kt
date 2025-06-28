@@ -1,5 +1,6 @@
 package org.example.project
 
+import androidx.compose.runtime.Composable
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -29,3 +30,6 @@ actual fun createHttpClient(): HttpClient {
 actual fun initLogger() {
     Napier.base(DebugAntilog())
 }
+
+actual fun isAndroid(): Boolean = false
+

@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
+import org.example.project.CameraView
 import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.data.core.Resource
 import org.example.project.ui.base.HandleResourceState
@@ -63,7 +64,9 @@ fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinView
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Bienvenido! ${displayName.value}")
+            //Text("Bienvenido! ${displayName.value}")
+
+            CameraView()
 
             // Mostrar el resultado del cierre de sesión
             HandleResourceState(
