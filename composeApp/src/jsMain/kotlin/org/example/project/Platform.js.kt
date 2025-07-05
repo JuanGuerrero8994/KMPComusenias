@@ -13,8 +13,9 @@ import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
+import org.example.project.ui.viewModel.GestureViewModel
+import org.koin.core.module.Module
 import org.w3c.dom.HTMLVideoElement
-import org.w3c.dom.mediacapture.MediaStream
 
 class JsPlatform: Platform {
     override val name: String = "Web with Kotlin/Js"
@@ -46,14 +47,14 @@ actual fun initLogger() {
 
 }
 
-actual fun isAndroid(): Boolean = false
 
 
 
-
+/**
+ * CameraView para web
+ * */
 @Composable
 actual fun CameraView() {
-    // No UI en Compose Skia, solo inicializa la cámara en <video>
     MainScope().launch {
         val constraints = js("{}")
         constraints.video = true
@@ -62,7 +63,7 @@ actual fun CameraView() {
 
         streamPromise.then { stream ->
             val videoElement = window.document.getElementById("camera") as? HTMLVideoElement
-            if (videoElement != null && stream is MediaStream) {
+            if (videoElement != null) {
                 videoElement.srcObject = stream
                 videoElement.play()
             }
@@ -71,3 +72,13 @@ actual fun CameraView() {
         }
     }
 }
+
+/**
+ * En la Web esta funcion ya maneja los permisos automaticamente
+ * */
+
+@Composable
+actual fun CameraViewWithPermission() {
+    CameraView()
+}
+

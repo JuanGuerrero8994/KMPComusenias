@@ -39,6 +39,7 @@ import org.example.project.ui.theme.HAVENT_ACCOUNT
 import org.example.project.ui.theme.LOGIN
 import org.example.project.ui.theme.PASSWORD
 import org.example.project.ui.theme.REGISTER
+import org.example.project.ui.viewModel.AuthViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 

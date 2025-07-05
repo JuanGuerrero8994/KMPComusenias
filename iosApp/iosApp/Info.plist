@@ -47,11 +47,17 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
-        <dict>
-            <key>NSAllowsArbitraryLoads</key>
-            <true/>
-        </dict>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>FirebaseAppDelegateProxyEnabled</key>
-<false/>
+	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Necesitamos acceso a la camara para grabar video</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Necesitamos guardar el video en tu galeria</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Necesitamos acceso al microfono para grabar audio en el video</string>
 </dict>
 </plist>

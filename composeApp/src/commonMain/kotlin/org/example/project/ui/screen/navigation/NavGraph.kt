@@ -9,16 +9,13 @@ import androidx.navigation.compose.NavHost
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
 import org.example.project.ui.screen.home.HomeScreen
 import org.example.project.ui.screen.profile.ProfileScreen
-import org.example.project.ui.screen.auth.AuthViewModel
 import org.example.project.ui.screen.auth.ResetPasswordScreen
 import org.example.project.ui.screen.settings.SettingsScreen
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
 
-@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun NavGraph(navController: NavHostController) {
+
 
     NavHost(navController = navController, startDestination = Destinations.SplashScreen.route) {
         // Rutas simples
@@ -26,6 +23,7 @@ fun NavGraph(navController: NavHostController) {
         addRoute(navController, Destinations.AuthScreen.route) { AuthScreen(it) }
         addRoute(navController, Destinations.SignUpScreen.route) { SignUpScreen(it) }
         addRoute(navController, Destinations.ResetPasswordScreen.route) { ResetPasswordScreen(it) }
+
 
         /*------------------BOTTOM NAVIGATION BAR-----------------------*/
         addBottomNavRoute(navController,BottomNavScreen.Home.route){ HomeScreen(it) }

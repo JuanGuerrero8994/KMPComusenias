@@ -16,14 +16,14 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import org.example.project.ui.base.HandleResourceState
 import org.example.project.ui.components.scaffold.ScaffoldComponent
-import org.example.project.ui.screen.auth.AuthViewModel
+import org.example.project.ui.viewModel.AuthViewModel
 import org.example.project.ui.screen.navigation.Destinations
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun SettingsScreen(navController: NavController, viewModel: AuthViewModel= koinViewModel()) {
+fun SettingsScreen(navController: NavController, viewModel: AuthViewModel = koinViewModel()) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = FocusRequester()

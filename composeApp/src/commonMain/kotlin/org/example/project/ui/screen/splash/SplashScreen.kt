@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
 import org.example.project.data.core.Resource
 import org.example.project.domain.model.user.User
-import org.example.project.ui.screen.auth.AuthViewModel
+import org.example.project.ui.viewModel.AuthViewModel
 import org.example.project.ui.screen.navigation.Destinations
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -42,7 +42,6 @@ fun SplashScreen(navController: NavController, viewModel: AuthViewModel = koinVi
             }
 
             is Resource.Error -> {
-                // Podés loguear o mostrar error si querés
                 navController.navigate(Destinations.AuthScreen.route) {
                     popUpTo(0) { inclusive = true }
                     launchSingleTop = true

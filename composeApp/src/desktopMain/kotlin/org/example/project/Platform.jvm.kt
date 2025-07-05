@@ -42,8 +42,4 @@ actual fun initLogger(){
     Napier.base(DebugAntilog())
 }
 
-actual fun isAndroid(): Boolean  = false
 
-@Composable
-actual fun CameraView() {
-}

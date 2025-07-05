@@ -50,6 +50,8 @@ kotlin {
     }
 
 
+
+
     sourceSets {
 
 
@@ -73,6 +75,10 @@ kotlin {
             implementation(libs.androidx.camera.video)
             implementation(libs.androidx.camera.view)
             implementation(libs.androidx.camera.extensions)
+            implementation(libs.guava)
+
+            //MEDIAPIPE - ANDROID
+            implementation (libs.mediapipe.task)
 
         }
 
@@ -141,10 +147,10 @@ kotlin {
             implementation(libs.ktor.client.cio)
 
         }
-
-
     }
+
 }
+
 
 android {
     namespace = "org.example.project"

@@ -14,4 +14,5 @@ sealed class Destinations(val route: String) {
     //RESET PASSWORD SCREEN
     data object ResetPasswordScreen : Destinations("resetPasswordScreen")
 
+
 }
