@@ -1,21 +1,69 @@
 {
   "project_info": {
-    "project_number": "835957728225",
-    "project_id": "fir-kmm-98510",
-    "storage_bucket": "fir-kmm-98510.firebasestorage.app"
+    "project_number": "220008974660",
+    "firebase_url": "https://comusenias-default-rtdb.firebaseio.com",
+    "project_id": "comusenias",
+    "storage_bucket": "comusenias.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:835957728225:android:65ae3ea7a68b8b35ea68a0",
+        "mobilesdk_app_id": "1:220008974660:android:4e2d378debdc4755272f11",
         "android_client_info": {
-          "package_name": "org.example.project"
+          "package_name": "com.ars.comusenias"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA67a1VhVlIHgNb_Nej2DKJ4vsKqqEoEvM"
+          "current_key": "AIzaSyAyRHMLJkzLrkyVhiwAe6raK_0w49wAKj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220008974660:android:c66c68f8204e2868272f11",
+        "android_client_info": {
+          "package_name": "com.comusenias.multiplatform"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyRHMLJkzLrkyVhiwAe6raK_0w49wAKj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220008974660:android:e53f5f700213372e272f11",
+        "android_client_info": {
+          "package_name": "com.example.comusenias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220008974660-b3o7a4q7r3fb2aof3ldsk479in1gptdh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.comusenias",
+            "certificate_hash": "097370cd5c1c3886d5b3ea7b261e8568c8cec370"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyRHMLJkzLrkyVhiwAe6raK_0w49wAKj8"
         }
       ],
       "services": {
