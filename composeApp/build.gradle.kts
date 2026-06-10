@@ -66,6 +66,17 @@ kotlin {
 
             //FIREBASE
             implementation(project.dependencies.platform(libs.firebase.bom))
+
+            // CAMERA
+            implementation(libs.androidx.camera.core)
+            implementation(libs.androidx.camera.camera2)
+            implementation(libs.androidx.camera.lifecycle)
+            implementation(libs.androidx.camera.view)
+
+            // Necesario para que Kotlin reconozca ListenableFuture de CameraX
+            implementation(libs.guava)
+
+
         }
 
 

@@ -6,10 +6,12 @@ import org.example.project.ui.screen.splash.SplashScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import org.example.project.ui.components.camera.CameraView
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
 import org.example.project.ui.screen.home.HomeScreen
 import org.example.project.ui.screen.profile.ProfileScreen
 import org.example.project.ui.screen.auth.ResetPasswordScreen
+import org.example.project.ui.screen.camera.CameraPreviewScreen
 import org.example.project.ui.screen.settings.SettingsScreen
 import org.koin.core.annotation.KoinExperimentalAPI
 
@@ -24,6 +26,7 @@ fun NavGraph(navController: NavHostController) {
         addRoute(navController, Destinations.AuthScreen.route) { AuthScreen(it) }
         addRoute(navController, Destinations.SignUpScreen.route) { SignUpScreen(it) }
         addRoute(navController, Destinations.ResetPasswordScreen.route) { ResetPasswordScreen(it) }
+        addRoute(navController, Destinations.CameraPreviewScreen.route) { CameraPreviewScreen(it) }
 
         /*------------------BOTTOM NAVIGATION BAR-----------------------*/
         addBottomNavRoute(navController,BottomNavScreen.Home.route){ HomeScreen(it) }

@@ -55,17 +55,17 @@ fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinView
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text("Bienvenido! ${displayName.value}")
+            //Text("Bienvenido! ${displayName.value}")
+            navController.navigate(Destinations.CameraPreviewScreen.route)
 
             // Mostrar el resultado del cierre de sesión
             HandleResourceState(
                 resource = signOutResult,
                 isLoading = isLoading,
-                onSuccess = {   navController.navigate(Destinations.SplashScreen.route) {
+                onSuccess = { navController.navigate(Destinations.SplashScreen.route) {
                     popUpTo(0) { inclusive = true }// Limpia el back stack
                 } },
             )
-
         }
     }
 }
