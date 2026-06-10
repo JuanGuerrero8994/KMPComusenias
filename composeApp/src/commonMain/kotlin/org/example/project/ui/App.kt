@@ -6,7 +6,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import org.example.project.ui.screen.navigation.NavGraph
+import org.example.project.ui.navigation.NavGraph
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable

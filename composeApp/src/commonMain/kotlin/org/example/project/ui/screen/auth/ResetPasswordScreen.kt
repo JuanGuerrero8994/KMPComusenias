@@ -26,7 +26,7 @@ import org.example.project.ui.components.auth.OutlinedTextFieldComponent
 import org.example.project.ui.components.auth.PasswordResetDialog
 import org.example.project.ui.components.customViews.TextViewField
 import org.example.project.ui.components.scaffold.ScaffoldComponent
-import org.example.project.ui.screen.navigation.Destinations
+import org.example.project.ui.navigation.Destinations
 import org.example.project.ui.theme.BUTTON_RESET_PASSWORD
 import org.example.project.ui.theme.DO_YOU_ALREADY_HAVE_AN_ACCOUNT
 import org.example.project.ui.theme.EMAIL_TEXT

@@ -15,8 +15,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import org.example.project.ui.screen.navigation.Destinations
 import org.example.project.ui.theme.SIZE14
 import org.example.project.ui.theme.SIZE5
 import org.example.project.ui.theme.blackColorApp

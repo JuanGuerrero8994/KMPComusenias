@@ -33,7 +33,7 @@ import org.example.project.ui.components.auth.ForgetMyPasswordComponent
 import org.example.project.ui.components.auth.OutlinedTextFieldComponent
 import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
-import org.example.project.ui.screen.navigation.Destinations
+import org.example.project.ui.navigation.Destinations
 import org.example.project.ui.theme.EMAIL_TEXT
 import org.example.project.ui.theme.HAVENT_ACCOUNT
 import org.example.project.ui.theme.LOGIN

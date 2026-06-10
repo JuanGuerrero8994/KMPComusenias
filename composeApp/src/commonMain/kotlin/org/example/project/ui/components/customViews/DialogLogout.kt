@@ -8,7 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavController
-import org.example.project.ui.screen.navigation.Destinations
+import org.example.project.ui.navigation.Destinations
 
 @Composable
 fun DialogLogout(

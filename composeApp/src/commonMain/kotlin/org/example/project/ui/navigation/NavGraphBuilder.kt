@@ -1,4 +1,4 @@
-package org.example.project.ui.screen.navigation
+package org.example.project.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument

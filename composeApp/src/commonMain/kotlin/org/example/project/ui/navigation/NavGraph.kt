@@ -1,4 +1,4 @@
-package org.example.project.ui.screen.navigation
+package org.example.project.ui.navigation
 
 import org.example.project.ui.screen.auth.AuthScreen
 import org.example.project.ui.screen.auth.SignUpScreen
@@ -9,10 +9,8 @@ import androidx.navigation.compose.NavHost
 import org.example.project.ui.components.scaffold.bottomNavBar.BottomNavScreen
 import org.example.project.ui.screen.home.HomeScreen
 import org.example.project.ui.screen.profile.ProfileScreen
-import org.example.project.ui.screen.auth.AuthViewModel
 import org.example.project.ui.screen.auth.ResetPasswordScreen
 import org.example.project.ui.screen.settings.SettingsScreen
-import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 
