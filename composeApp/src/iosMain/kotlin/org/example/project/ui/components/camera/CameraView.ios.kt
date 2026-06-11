@@ -8,31 +8,64 @@ import androidx.compose.ui.interop.UIKitView
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.AVFoundation.*
 import platform.CoreGraphics.CGRectMake
+import platform.CoreMedia.CMSampleBufferRef
 import platform.QuartzCore.CATransaction
 import platform.QuartzCore.kCATransactionDisableActions
 import platform.UIKit.UIView
 import platform.darwin.dispatch_async
 import platform.darwin.dispatch_get_global_queue
 import platform.darwin.DISPATCH_QUEUE_PRIORITY_DEFAULT
+import platform.darwin.NSObject
+import platform.darwin.dispatch_queue_create
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.TimeSource
+
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun CameraView(
     modifier: Modifier,
-    onCapture: (ByteArray?) -> Unit
+    onCapture: (ByteArray?) -> Unit,
+    onFrameCaptured: (Any) -> Unit
 ) {
-    // 1. Usamos remember para que la sesión no se recree en cada recomposición
     val session = remember { AVCaptureSession() }
     val cameraPreviewLayer = remember { AVCaptureVideoPreviewLayer(session = session) }
 
-    // 2. Gestionamos el inicio y parada de la sesión según el ciclo de vida del componente
+    // Delegate para capturar los frames de video
+    val dataOutputDelegate = remember {
+        object : NSObject(), AVCaptureVideoDataOutputSampleBufferDelegateProtocol {
+
+            private val timeSource = TimeSource.Monotonic
+            private var lastFrameMark = timeSource.markNow()
+
+            override fun captureOutput(
+                output: AVCaptureOutput,
+                didOutputSampleBuffer: CMSampleBufferRef?,
+                fromConnection: AVCaptureConnection
+            ) {
+                val now = timeSource.markNow()
+
+                if (now - lastFrameMark < 100.milliseconds) {
+                    return
+                }
+
+                lastFrameMark = now
+
+                didOutputSampleBuffer?.let {
+                    onFrameCaptured(it)
+                }
+            }
+        }
+    }
+
     DisposableEffect(Unit) {
         val globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT.toLong(), 0u)
+        val dataOutputQueue = dispatch_queue_create("video_data_output_queue", null)
 
         dispatch_async(globalQueue) {
             session.beginConfiguration()
 
-            // Configuración de la cámara frontal (Usando API moderna)
+            // 1. Configurar Cámara Frontal
             val device = AVCaptureDeviceDiscoverySession.discoverySessionWithDeviceTypes(
                 deviceTypes = listOf(AVCaptureDeviceTypeBuiltInWideAngleCamera),
                 mediaType = AVMediaTypeVideo,
@@ -46,8 +79,13 @@ actual fun CameraView(
                 }
             }
 
-            if (session.canSetSessionPreset(AVCaptureSessionPresetHigh)) {
-                session.sessionPreset = AVCaptureSessionPresetHigh
+            // 2. Configurar Salida de Datos para MediaPipe
+            val videoDataOutput = AVCaptureVideoDataOutput().apply {
+                alwaysDiscardsLateVideoFrames = true
+                setSampleBufferDelegate(dataOutputDelegate, dataOutputQueue)
+            }
+            if (session.canAddOutput(videoDataOutput)) {
+                session.addOutput(videoDataOutput)
             }
 
             session.commitConfiguration()
@@ -56,19 +94,15 @@ actual fun CameraView(
 
         onDispose {
             dispatch_async(globalQueue) {
-                if (session.isRunning()) {
-                    session.stopRunning()
-                }
+                if (session.isRunning()) session.stopRunning()
             }
         }
     }
 
-    // 3. UI con UIKitView
     UIKitView(
         modifier = modifier.fillMaxSize(),
         background = Color.Black,
         factory = {
-            // Creamos un contenedor que ajuste la capa de la cámara automáticamente
             val container = object : UIView(frame = CGRectMake(0.0, 0.0, 0.0, 0.0)) {
                 override fun layoutSubviews() {
                     super.layoutSubviews()
@@ -78,7 +112,6 @@ actual fun CameraView(
                     CATransaction.commit()
                 }
             }
-
             cameraPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
             container.layer.addSublayer(cameraPreviewLayer)
             container

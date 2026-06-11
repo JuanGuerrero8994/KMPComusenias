@@ -8,5 +8,6 @@ import org.example.project.di.initKoin
 import org.example.project.ui.App
 
 fun MainViewController() = ComposeUIViewController {
+    initLogger()
     App()
 }

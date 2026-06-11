@@ -11,8 +11,15 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 
+// composeApp/src/androidMain/kotlin/org/example/project/ui/components/camera/CameraView.android.kt
+import androidx.camera.core.ImageAnalysis // <-- Nuevo import
+
 @Composable
-actual fun CameraView(modifier: Modifier, onCapture: (ByteArray?) -> Unit) {
+actual fun CameraView(
+    modifier: Modifier,
+    onCapture: (ByteArray?) -> Unit,
+    onFrameCaptured: (Any) -> Unit // Recibimos el callback
+) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
@@ -26,11 +33,23 @@ actual fun CameraView(modifier: Modifier, onCapture: (ByteArray?) -> Unit) {
 
             cameraProviderFuture.addListener({
                 val cameraProvider = cameraProviderFuture.get()
+
+                // 1. Configurar Preview
                 val preview = Preview.Builder().build().also {
                     it.surfaceProvider = previewView.surfaceProvider
                 }
 
-                // Cambiamos a la cámara FRONTAL
+                // 2. Configurar Analizador de Imagen (MediaPipe)
+                val imageAnalysis = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+                    .build()
+
+                imageAnalysis.setAnalyzer(executor) { imageProxy ->
+                    // Enviamos el frame al callback (que llegará al ViewModel)
+                    onFrameCaptured(imageProxy)
+                }
+
                 val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
 
                 try {
@@ -38,7 +57,8 @@ actual fun CameraView(modifier: Modifier, onCapture: (ByteArray?) -> Unit) {
                     cameraProvider.bindToLifecycle(
                         lifecycleOwner,
                         cameraSelector,
-                        preview
+                        preview,
+                        imageAnalysis // <-- Registramos el analizador aquí
                     )
                 } catch (e: Exception) {
                     e.printStackTrace()

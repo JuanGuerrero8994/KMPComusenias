@@ -2,8 +2,11 @@ package org.example.project.ui.navigation
 
 sealed class Destinations(val route: String) {
 
-    //SPLASHSCREEN
+    //SPLASH SCREEN
     data object SplashScreen : Destinations("splashScreen")
+
+    //HOME SCREEN
+    data object HomeScreen : Destinations("HomeScreen")
 
     //AUTH  SCREEN
     data object AuthScreen : Destinations("authScreen")

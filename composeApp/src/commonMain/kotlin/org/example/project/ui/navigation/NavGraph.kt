@@ -23,6 +23,7 @@ fun NavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Destinations.SplashScreen.route) {
         // Rutas simples
         addRoute(navController, Destinations.SplashScreen.route) { SplashScreen(it) }
+        addRoute(navController, Destinations.HomeScreen.route) { HomeScreen(it) }
         addRoute(navController, Destinations.AuthScreen.route) { AuthScreen(it) }
         addRoute(navController, Destinations.SignUpScreen.route) { SignUpScreen(it) }
         addRoute(navController, Destinations.ResetPasswordScreen.route) { ResetPasswordScreen(it) }

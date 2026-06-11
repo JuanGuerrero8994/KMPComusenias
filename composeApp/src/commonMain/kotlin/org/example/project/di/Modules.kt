@@ -7,34 +7,27 @@ import io.ktor.client.HttpClient
 import org.example.project.data.core.ErrorHandler
 import org.example.project.data.repository.AuthRepositoryImpl
 import org.example.project.domain.repository.AuthRepository
-import org.example.project.domain.usecase.AuthUseCase
+import org.example.project.domain.usecase.auth.AuthUseCase
 import org.example.project.ui.screen.auth.AuthViewModel
-import org.koin.compose.viewmodel.dsl.viewModel
+import org.example.project.domain.usecase.gesture.RecognizeGestureUseCase
+import org.example.project.ui.viewModel.GestureViewModel
 import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-private val dataModule = module {
+
+val sharedModules = module {
     single { HttpClient() }
     single { ErrorHandler() }
     single { Firebase.auth }
     single { Firebase.firestore }
     single <AuthRepository> { AuthRepositoryImpl(get(), get(), get()) }
 
-}
-
-private val domainModule = module {
     factory { AuthUseCase(get()) }
-}
+    factory { RecognizeGestureUseCase(get()) }
 
-
-private val viewModelModule = module {
     viewModelOf(::AuthViewModel)
+    viewModelOf(::GestureViewModel)
 }
 
-
-
-
-var sharedModules = listOf(domainModule, dataModule, viewModelModule)
-
-
+expect val platformModule: Module

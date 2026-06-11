@@ -5,9 +5,9 @@
     import kotlinx.coroutines.flow.StateFlow
     import org.example.project.data.core.Resource
     import org.example.project.domain.model.user.User
-    import org.example.project.domain.usecase.AuthUseCase
+    import org.example.project.domain.usecase.auth.AuthUseCase
     import org.example.project.ui.base.BaseViewModel
-    import org.example.project.domain.usecase.AuthAction.*
+    import org.example.project.domain.usecase.auth.AuthAction.*
     import org.example.project.domain.validation.BirthDateValidator
     import org.example.project.domain.validation.CompositeValidator
     import org.example.project.domain.validation.ConfirmPasswordValidator

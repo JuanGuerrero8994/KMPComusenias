@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 @Composable
 actual fun CameraView(
     modifier: Modifier,
-    onCapture: (ByteArray?) -> Unit
+    onCapture: (ByteArray?) -> Unit,
+    onFrameCaptured: (Any) -> Unit
 ) {
 }

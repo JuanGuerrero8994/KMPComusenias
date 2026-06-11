@@ -26,6 +26,27 @@
 		1ECF6D4B2D45AD8E00E40FC9 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1ECF6D4A2D45AD8E00E40FC9 /* FirebaseMessaging */; };
 		1ECF6D4D2D45AD8E00E40FC9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1ECF6D4C2D45AD8E00E40FC9 /* FirebaseStorage */; };
 		1ECF6D4F2D4687D800E40FC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ECF6D4E2D4687C900E40FC9 /* GoogleService-Info.plist */; };
+		1EE01D1B2FDA4CC0005327E2 /* alphabet.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D062FDA4CBF005327E2 /* alphabet.task */; };
+		1EE01D1C2FDA4CC0005327E2 /* gesture_recognizer_success.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D072FDA4CBF005327E2 /* gesture_recognizer_success.task */; };
+		1EE01D1D2FDA4CC0005327E2 /* pose_landmarker_full.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D082FDA4CBF005327E2 /* pose_landmarker_full.task */; };
+		1EE01D1E2FDA4CC0005327E2 /* pose_landmarker_lite.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D092FDA4CBF005327E2 /* pose_landmarker_lite.task */; };
+		1EE01D1F2FDA4CC0005327E2 /* wordsOfCourtesyPtOne.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D0A2FDA4CBF005327E2 /* wordsOfCourtesyPtOne.task */; };
+		1EE01D202FDA4CC0005327E2 /* gesture_recognizer_three.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D0B2FDA4CBF005327E2 /* gesture_recognizer_three.task */; };
+		1EE01D212FDA4CC0005327E2 /* opposites.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D0C2FDA4CBF005327E2 /* opposites.task */; };
+		1EE01D222FDA4CC0005327E2 /* colors.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D0D2FDA4CBF005327E2 /* colors.task */; };
+		1EE01D232FDA4CC0005327E2 /* month.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D0E2FDA4CBF005327E2 /* month.task */; };
+		1EE01D242FDA4CC0005327E2 /* wordsOfCourtesyPtTwo.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D0F2FDA4CBF005327E2 /* wordsOfCourtesyPtTwo.task */; };
+		1EE01D252FDA4CC0005327E2 /* gesture_recognizer_ultimo.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D102FDA4CBF005327E2 /* gesture_recognizer_ultimo.task */; };
+		1EE01D262FDA4CC0005327E2 /* gesture_recognizer_lsa.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D112FDA4CBF005327E2 /* gesture_recognizer_lsa.task */; };
+		1EE01D272FDA4CC0005327E2 /* gesture_recognizer.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D122FDA4CBF005327E2 /* gesture_recognizer.task */; };
+		1EE01D282FDA4CC0005327E2 /* zodiacsigns.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D132FDA4CBF005327E2 /* zodiacsigns.task */; };
+		1EE01D292FDA4CC0005327E2 /* family.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D142FDA4CBF005327E2 /* family.task */; };
+		1EE01D2A2FDA4CC0005327E2 /* gesture_recognizer_words.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D152FDA4CC0005327E2 /* gesture_recognizer_words.task */; };
+		1EE01D2B2FDA4CC0005327E2 /* pose_landmarker_heavy.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D162FDA4CC0005327E2 /* pose_landmarker_heavy.task */; };
+		1EE01D2C2FDA4CC0005327E2 /* face_landmarker.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D172FDA4CC0005327E2 /* face_landmarker.task */; };
+		1EE01D2D2FDA4CC0005327E2 /* vowels_alpabet_words.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D182FDA4CC0005327E2 /* vowels_alpabet_words.task */; };
+		1EE01D2E2FDA4CC0005327E2 /* gesture_recognizer_words_two.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D192FDA4CC0005327E2 /* gesture_recognizer_words_two.task */; };
+		1EE01D2F2FDA4CC0005327E2 /* daysOfWeeks.task in Resources */ = {isa = PBXBuildFile; fileRef = 1EE01D1A2FDA4CC0005327E2 /* daysOfWeeks.task */; };
 		1EF54EDB2DFCC5B3008A819B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF54EDA2DFCC5B3008A819B /* FirebaseAuth */; };
 		1EF54EDD2DFCC5B3008A819B /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF54EDC2DFCC5B3008A819B /* FirebaseCore */; };
 		1EF54EDF2DFCC5B3008A819B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1EF54EDE2DFCC5B3008A819B /* FirebaseFirestore */; };
@@ -37,6 +58,27 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1ECF6D4E2D4687C900E40FC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1EE01D062FDA4CBF005327E2 /* alphabet.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = alphabet.task; path = ../composeApp/src/androidMain/assets/alphabet.task; sourceTree = "<group>"; };
+		1EE01D072FDA4CBF005327E2 /* gesture_recognizer_success.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = gesture_recognizer_success.task; path = ../composeApp/src/androidMain/assets/gesture_recognizer_success.task; sourceTree = "<group>"; };
+		1EE01D082FDA4CBF005327E2 /* pose_landmarker_full.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = pose_landmarker_full.task; path = ../composeApp/src/androidMain/assets/pose_landmarker_full.task; sourceTree = "<group>"; };
+		1EE01D092FDA4CBF005327E2 /* pose_landmarker_lite.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = pose_landmarker_lite.task; path = ../composeApp/src/androidMain/assets/pose_landmarker_lite.task; sourceTree = "<group>"; };
+		1EE01D0A2FDA4CBF005327E2 /* wordsOfCourtesyPtOne.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = wordsOfCourtesyPtOne.task; path = ../composeApp/src/androidMain/assets/wordsOfCourtesyPtOne.task; sourceTree = "<group>"; };
+		1EE01D0B2FDA4CBF005327E2 /* gesture_recognizer_three.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = gesture_recognizer_three.task; path = ../composeApp/src/androidMain/assets/gesture_recognizer_three.task; sourceTree = "<group>"; };
+		1EE01D0C2FDA4CBF005327E2 /* opposites.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = opposites.task; path = ../composeApp/src/androidMain/assets/opposites.task; sourceTree = "<group>"; };
+		1EE01D0D2FDA4CBF005327E2 /* colors.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = colors.task; path = ../composeApp/src/androidMain/assets/colors.task; sourceTree = "<group>"; };
+		1EE01D0E2FDA4CBF005327E2 /* month.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = month.task; path = ../composeApp/src/androidMain/assets/month.task; sourceTree = "<group>"; };
+		1EE01D0F2FDA4CBF005327E2 /* wordsOfCourtesyPtTwo.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = wordsOfCourtesyPtTwo.task; path = ../composeApp/src/androidMain/assets/wordsOfCourtesyPtTwo.task; sourceTree = "<group>"; };
+		1EE01D102FDA4CBF005327E2 /* gesture_recognizer_ultimo.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = gesture_recognizer_ultimo.task; path = ../composeApp/src/androidMain/assets/gesture_recognizer_ultimo.task; sourceTree = "<group>"; };
+		1EE01D112FDA4CBF005327E2 /* gesture_recognizer_lsa.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = gesture_recognizer_lsa.task; path = ../composeApp/src/androidMain/assets/gesture_recognizer_lsa.task; sourceTree = "<group>"; };
+		1EE01D122FDA4CBF005327E2 /* gesture_recognizer.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = gesture_recognizer.task; path = ../composeApp/src/androidMain/assets/gesture_recognizer.task; sourceTree = "<group>"; };
+		1EE01D132FDA4CBF005327E2 /* zodiacsigns.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = zodiacsigns.task; path = ../composeApp/src/androidMain/assets/zodiacsigns.task; sourceTree = "<group>"; };
+		1EE01D142FDA4CBF005327E2 /* family.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = family.task; path = ../composeApp/src/androidMain/assets/family.task; sourceTree = "<group>"; };
+		1EE01D152FDA4CC0005327E2 /* gesture_recognizer_words.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = gesture_recognizer_words.task; path = ../composeApp/src/androidMain/assets/gesture_recognizer_words.task; sourceTree = "<group>"; };
+		1EE01D162FDA4CC0005327E2 /* pose_landmarker_heavy.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = pose_landmarker_heavy.task; path = ../composeApp/src/androidMain/assets/pose_landmarker_heavy.task; sourceTree = "<group>"; };
+		1EE01D172FDA4CC0005327E2 /* face_landmarker.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = face_landmarker.task; path = ../composeApp/src/androidMain/assets/face_landmarker.task; sourceTree = "<group>"; };
+		1EE01D182FDA4CC0005327E2 /* vowels_alpabet_words.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = vowels_alpabet_words.task; path = ../composeApp/src/androidMain/assets/vowels_alpabet_words.task; sourceTree = "<group>"; };
+		1EE01D192FDA4CC0005327E2 /* gesture_recognizer_words_two.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = gesture_recognizer_words_two.task; path = ../composeApp/src/androidMain/assets/gesture_recognizer_words_two.task; sourceTree = "<group>"; };
+		1EE01D1A2FDA4CC0005327E2 /* daysOfWeeks.task */ = {isa = PBXFileReference; lastKnownFileType = file; name = daysOfWeeks.task; path = ../composeApp/src/androidMain/assets/daysOfWeeks.task; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* KMPComusenias.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KMPComusenias.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +134,27 @@
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
+				1EE01D062FDA4CBF005327E2 /* alphabet.task */,
+				1EE01D0D2FDA4CBF005327E2 /* colors.task */,
+				1EE01D1A2FDA4CC0005327E2 /* daysOfWeeks.task */,
+				1EE01D172FDA4CC0005327E2 /* face_landmarker.task */,
+				1EE01D142FDA4CBF005327E2 /* family.task */,
+				1EE01D122FDA4CBF005327E2 /* gesture_recognizer.task */,
+				1EE01D112FDA4CBF005327E2 /* gesture_recognizer_lsa.task */,
+				1EE01D072FDA4CBF005327E2 /* gesture_recognizer_success.task */,
+				1EE01D0B2FDA4CBF005327E2 /* gesture_recognizer_three.task */,
+				1EE01D102FDA4CBF005327E2 /* gesture_recognizer_ultimo.task */,
+				1EE01D152FDA4CC0005327E2 /* gesture_recognizer_words.task */,
+				1EE01D192FDA4CC0005327E2 /* gesture_recognizer_words_two.task */,
+				1EE01D0E2FDA4CBF005327E2 /* month.task */,
+				1EE01D0C2FDA4CBF005327E2 /* opposites.task */,
+				1EE01D082FDA4CBF005327E2 /* pose_landmarker_full.task */,
+				1EE01D162FDA4CC0005327E2 /* pose_landmarker_heavy.task */,
+				1EE01D092FDA4CBF005327E2 /* pose_landmarker_lite.task */,
+				1EE01D182FDA4CC0005327E2 /* vowels_alpabet_words.task */,
+				1EE01D0A2FDA4CBF005327E2 /* wordsOfCourtesyPtOne.task */,
+				1EE01D0F2FDA4CBF005327E2 /* wordsOfCourtesyPtTwo.task */,
+				1EE01D132FDA4CBF005327E2 /* zodiacsigns.task */,
 				AB1DB47929225F7C00F7AF9C /* Configuration */,
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FF7C242A565900829871 /* Products */,
@@ -215,6 +278,27 @@
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 				1ECF6D4F2D4687D800E40FC9 /* GoogleService-Info.plist in Resources */,
+				1EE01D1B2FDA4CC0005327E2 /* alphabet.task in Resources */,
+				1EE01D1C2FDA4CC0005327E2 /* gesture_recognizer_success.task in Resources */,
+				1EE01D1D2FDA4CC0005327E2 /* pose_landmarker_full.task in Resources */,
+				1EE01D1E2FDA4CC0005327E2 /* pose_landmarker_lite.task in Resources */,
+				1EE01D1F2FDA4CC0005327E2 /* wordsOfCourtesyPtOne.task in Resources */,
+				1EE01D202FDA4CC0005327E2 /* gesture_recognizer_three.task in Resources */,
+				1EE01D212FDA4CC0005327E2 /* opposites.task in Resources */,
+				1EE01D222FDA4CC0005327E2 /* colors.task in Resources */,
+				1EE01D232FDA4CC0005327E2 /* month.task in Resources */,
+				1EE01D242FDA4CC0005327E2 /* wordsOfCourtesyPtTwo.task in Resources */,
+				1EE01D252FDA4CC0005327E2 /* gesture_recognizer_ultimo.task in Resources */,
+				1EE01D262FDA4CC0005327E2 /* gesture_recognizer_lsa.task in Resources */,
+				1EE01D272FDA4CC0005327E2 /* gesture_recognizer.task in Resources */,
+				1EE01D282FDA4CC0005327E2 /* zodiacsigns.task in Resources */,
+				1EE01D292FDA4CC0005327E2 /* family.task in Resources */,
+				1EE01D2A2FDA4CC0005327E2 /* gesture_recognizer_words.task in Resources */,
+				1EE01D2B2FDA4CC0005327E2 /* pose_landmarker_heavy.task in Resources */,
+				1EE01D2C2FDA4CC0005327E2 /* face_landmarker.task in Resources */,
+				1EE01D2D2FDA4CC0005327E2 /* vowels_alpabet_words.task in Resources */,
+				1EE01D2E2FDA4CC0005327E2 /* gesture_recognizer_words_two.task in Resources */,
+				1EE01D2F2FDA4CC0005327E2 /* daysOfWeeks.task in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
