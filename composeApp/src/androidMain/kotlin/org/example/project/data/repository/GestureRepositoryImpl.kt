@@ -18,8 +18,11 @@ import org.example.project.domain.repository.GestureRepository
 class GestureRepositoryImpl(private val context: Context) : GestureRepository {
     private var recognizer: GestureRecognizer? = null
     private val _gestureResults = MutableStateFlow<GestureResult?>(null)
+    private var lastProcessedTime = 0L
 
     override fun setup() {
+        if (recognizer != null) return
+        
         try {
             val options = GestureRecognizer.GestureRecognizerOptions.builder()
                 .setBaseOptions(
@@ -38,7 +41,7 @@ class GestureRepositoryImpl(private val context: Context) : GestureRepository {
 
             Napier.d("GestureRecognizer inicializado correctamente")
 
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             Napier.e("Error inicializando GestureRecognizer", e)
         }
     }
@@ -51,17 +54,32 @@ class GestureRepositoryImpl(private val context: Context) : GestureRepository {
             return _gestureResults
         }
 
-        try {
-            Napier.d("Procesando frame timestamp=${imageProxy.imageInfo.timestamp}")
+        // Throttling para no saturar el procesador
+        val now = System.currentTimeMillis()
+        if (now - lastProcessedTime < 100) {
+            imageProxy.close()
+            return _gestureResults
+        }
+        lastProcessedTime = now
 
+        if (recognizer == null) {
+            Napier.w("Recognizer aún no inicializado, intentando inicializar...")
+            setup()
+        }
+
+        try {
             val bitmap: Bitmap = imageProxy.toBitmap()
             val mpImage: MPImage = BitmapImageBuilder(bitmap).build()
 
-            recognizer?.recognizeAsync(mpImage, imageProxy.imageInfo.timestamp)
-                ?: Napier.w("Recognizer aún no inicializado")
+            // MediaPipe espera el timestamp en milisegundos.
+            val timestampMs = imageProxy.imageInfo.timestamp / 1_000_000
+
+            recognizer?.recognizeAsync(mpImage, timestampMs)
 
         } catch (e: Exception) {
             Napier.e("Error en detectGestures()", e)
+        } finally {
+            imageProxy.close()
         }
 
         return _gestureResults

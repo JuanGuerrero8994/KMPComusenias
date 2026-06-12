@@ -50,23 +50,14 @@ fun CameraPreviewScreen(navController:NavController, viewModel: AuthViewModel = 
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             if (showCamera) {
 
-                val throttledFrameHandler = remember {
-                    var last = 0L
-
-                    { frame: Any ->
-                        val now = getTimeMillis()
-                        if (now - last > 100) {
-                            last = now
-                            gestureViewModel.onFrameCaptured(frame)
-                        }
-                    }
-                }
-
                 CameraView(
                     modifier = Modifier.fillMaxSize(),
                     onCapture = { showCamera = false },
-                    onFrameCaptured = throttledFrameHandler
+                    onFrameCaptured = { frame ->
+                        gestureViewModel.onFrameCaptured(frame)
+                    }
                 )
+                GestureOverlay(gestureResult= gestureResult)
 
                 gestureResult?.let {
                     Text(

@@ -45,7 +45,7 @@ ktor = "3.1.1"
 androidx-camera = "1.4.0"
 
 # MEDIAPIPE
-mediapipe = "0.10.14"
+mediapipe = "0.10.16"
 
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -107,6 +107,7 @@ androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "
 
 # MEDIAPIPE
 mediapipe-tasks-vision = { module = "com.google.mediapipe:tasks-vision", version.ref = "mediapipe" }
+mediapipe-tasks-core = { module = "com.google.mediapipe:tasks-core", version.ref = "mediapipe" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

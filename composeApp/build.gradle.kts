@@ -89,7 +89,8 @@ kotlin {
             implementation(libs.guava)
 
             // MEDIAPIPE
-            implementation(libs.mediapipe.tasks.vision)
+            api(libs.mediapipe.tasks.vision)
+            api(libs.mediapipe.tasks.core)
 
             //KOIN CONTEXT
             implementation(libs.koin.android)
@@ -167,9 +168,12 @@ android {
     namespace = "org.example.project"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+    sourceSets["main"].apply {
+        manifest.srcFile("src/androidMain/AndroidManifest.xml")
+        res.srcDirs("src/androidMain/res")
+        resources.srcDirs("src/commonMain/resources")
+        assets.srcDirs("src/androidMain/assets")
+    }
 
     defaultConfig {
         applicationId = "com.comusenias.multiplatform"
@@ -177,10 +181,17 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+
+        ndk {
+            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
+        }
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+        jniLibs {
+            pickFirsts.add("**/*.so")
         }
     }
     buildTypes {

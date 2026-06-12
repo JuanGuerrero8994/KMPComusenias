@@ -3,22 +3,21 @@ package org.example.project.ui.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import org.example.project.domain.model.mediapipe.GestureResult
 import org.example.project.domain.usecase.gesture.RecognizeGestureUseCase
 
 class GestureViewModel(private val recognizeGestureUseCase: RecognizeGestureUseCase) : ViewModel() {
 
-    private val _gestureResult = MutableStateFlow<GestureResult?>(null)
-    val gestureResult: StateFlow<GestureResult?> = _gestureResult.asStateFlow()
+    val gestureResult: StateFlow<GestureResult?> = recognizeGestureUseCase(Any())
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+
+    init {
+        setup()
+    }
 
     fun onFrameCaptured(frame: Any) {
-        viewModelScope.launch {
-            recognizeGestureUseCase(frame)
-                .collect { result ->
-                    _gestureResult.value = result
-                }
-        }
+        // Ejecutamos para procesar el frame. El resultado se emitirá por el StateFlow.
+        recognizeGestureUseCase(frame)
     }
 
     fun setup() {
