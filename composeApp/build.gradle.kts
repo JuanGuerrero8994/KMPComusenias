@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.kotlinxSerialization)
+    kotlin("native.cocoapods") // Asegúrate de tener este plugin
 }
 
 kotlin {
@@ -27,6 +28,17 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+        }
+    }
+
+    cocoapods {
+        version = "1.0.0"
+        summary = "Integración de MediaPipe para Gestos"
+        homepage = "https://example.com"
+        ios.deploymentTarget = "15.3"
+        pod("MediaPipeTasksVision") // <--- El SDK de MediaPipe
+        framework {
+            baseName = "composeApp"
         }
     }
 
@@ -67,7 +79,7 @@ kotlin {
             //FIREBASE
             implementation(project.dependencies.platform(libs.firebase.bom))
 
-            // CAMERA
+            //CAMERA
             implementation(libs.androidx.camera.core)
             implementation(libs.androidx.camera.camera2)
             implementation(libs.androidx.camera.lifecycle)
@@ -76,6 +88,12 @@ kotlin {
             // Necesario para que Kotlin reconozca ListenableFuture de CameraX
             implementation(libs.guava)
 
+            // MEDIAPIPE
+            api(libs.mediapipe.tasks.vision)
+            api(libs.mediapipe.tasks.core)
+
+            //KOIN CONTEXT
+            implementation(libs.koin.android)
 
         }
 
@@ -104,16 +122,13 @@ kotlin {
             //NAPIER LOGS
             implementation(libs.napier)
 
-
             //DEPENDENCY INJECTION KOIN
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
-
             //NAVIGATION
             implementation(libs.navigation.compose)
-
 
             //COIL
             implementation(libs.coil.compose.core)

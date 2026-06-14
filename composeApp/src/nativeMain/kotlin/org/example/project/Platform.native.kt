@@ -26,6 +26,3 @@ actual fun createHttpClient(): HttpClient {
     }
 }
 
-actual fun initLogger() {
-    Napier.base(DebugAntilog())
-}

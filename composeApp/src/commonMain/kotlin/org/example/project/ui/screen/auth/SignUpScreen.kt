@@ -40,6 +40,7 @@ import org.example.project.ui.theme.COMPLETE_NAME
 import org.example.project.ui.theme.CONFIRM_PASS
 import org.example.project.ui.theme.ESPECIALIST
 import org.example.project.ui.theme.PASSWORD
+import org.example.project.ui.viewModel.AuthViewModel
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI

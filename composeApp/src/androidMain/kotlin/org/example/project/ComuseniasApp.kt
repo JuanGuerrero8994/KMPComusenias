@@ -3,8 +3,7 @@ package org.example.project
 import android.app.Application
 import com.google.firebase.FirebaseApp
 import org.example.project.di.initKoin
-import org.example.project.di.sharedModules
-import org.koin.core.context.startKoin
+import org.koin.android.ext.koin.androidContext
 
 
 class ComuseniasApp: Application() {
@@ -12,9 +11,9 @@ class ComuseniasApp: Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
-        initLogger()
-        startKoin {
-            modules(sharedModules)
+        initKoin {
+            // Inyectamos el contexto de Android (requiere koin-android)
+            androidContext(this@ComuseniasApp)
         }
 
     }

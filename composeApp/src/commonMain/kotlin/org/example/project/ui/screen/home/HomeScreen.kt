@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import org.example.project.ui.components.scaffold.ScaffoldComponent
 import org.example.project.ui.base.HandleResourceState
-import org.example.project.ui.screen.auth.AuthViewModel
+import org.example.project.ui.viewModel.AuthViewModel
 import org.example.project.ui.navigation.Destinations
 
 import org.koin.compose.viewmodel.koinViewModel
@@ -28,19 +28,23 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinViewModel()) {
+fun HomeScreen(
+    navController: NavController,
+    viewModel: AuthViewModel = koinViewModel()
+) {
 
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val focusRequester = FocusRequester()
-
-    // Observar el resultado del cierre de sesión
     val signOutResult by viewModel.signOutResult.collectAsState()
     val isLoading = viewModel.loading.collectAsState()
 
-    val displayName = viewModel.currentUserState.collectAsState()
-
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         viewModel.checkCurrentUser()
+
+        navController.navigate(Destinations.CameraPreviewScreen.route) {
+            popUpTo(Destinations.HomeScreen.route) {
+                inclusive = true
+            }
+            launchSingleTop = true
+        }
     }
 
     ScaffoldComponent(
@@ -51,22 +55,20 @@ fun HomeScreen(navController: NavController, viewModel: AuthViewModel = koinView
         floatingActionButton = null
     ) {
         Column(
-            modifier = Modifier.fillMaxSize().pointerInput(Unit) { keyboardController?.hide() }.focusRequester(focusRequester),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            //Text("Bienvenido! ${displayName.value}")
-            navController.navigate(Destinations.CameraPreviewScreen.route)
 
-            // Mostrar el resultado del cierre de sesión
             HandleResourceState(
                 resource = signOutResult,
                 isLoading = isLoading,
-                onSuccess = { navController.navigate(Destinations.SplashScreen.route) {
-                    popUpTo(0) { inclusive = true }// Limpia el back stack
-                } },
+                onSuccess = {
+                    navController.navigate(Destinations.SplashScreen.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
             )
         }
     }
 }
-

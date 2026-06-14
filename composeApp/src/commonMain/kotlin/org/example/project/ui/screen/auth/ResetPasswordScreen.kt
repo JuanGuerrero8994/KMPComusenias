@@ -35,6 +35,7 @@ import org.example.project.ui.theme.SIZE12
 import org.example.project.ui.theme.SIZE90
 import org.example.project.ui.theme.TEXT_RESET_PASSWORD
 import org.example.project.ui.theme.primaryColorApp
+import org.example.project.ui.viewModel.AuthViewModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 

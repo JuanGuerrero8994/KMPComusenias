@@ -44,6 +44,9 @@ ktor = "3.1.1"
 # CAMERA
 androidx-camera = "1.4.0"
 
+# MEDIAPIPE
+mediapipe = "0.10.16"
+
 [libraries]
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 kmp-date-time-picker = { module = "network.chaintech:kmp-date-time-picker", version.ref = "kmpDateTimePicker" }
@@ -101,6 +104,10 @@ androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "androidx-camera" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "androidx-camera" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "androidx-camera" }
+
+# MEDIAPIPE
+mediapipe-tasks-vision = { module = "com.google.mediapipe:tasks-vision", version.ref = "mediapipe" }
+mediapipe-tasks-core = { module = "com.google.mediapipe:tasks-core", version.ref = "mediapipe" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
